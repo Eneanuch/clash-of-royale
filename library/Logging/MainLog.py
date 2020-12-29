@@ -14,8 +14,9 @@ class MainLog:  # it will build and write logs
     DEFAULT_STATE = 1  # its good
     NO_NAME_LOG_STATE = 1
 
-    def __init__(self, log_path, print_logs, log_it):
-        self.log_path = log_path  # path to logs
+    PATH_TO_LOGS = ""
+
+    def __init__(self, print_logs, log_it):
         self.print_logs = print_logs  # is program need to print logs
         self.log_it = log_it  # do logs ?(действительно, а для кого я тогда эту хрень делаю???)
 
@@ -36,7 +37,7 @@ class MainLog:  # it will build and write logs
             global file
             if not start_log_it:
                 start_log_it = 1
-                file = open(self.log_path + 'logs.' +
+                file = open(self.PATH_TO_LOGS + 'logs.' +
                             datetime.today().strftime('%Y-%m-%d-%H.%M.%S') + '.log',
                             mode="w", encoding='utf-8')
             file.write(message)
