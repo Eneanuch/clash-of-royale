@@ -19,12 +19,12 @@ class DBManager:
             self.main_log.write_log("Can't load database", self, self.main_log.CANT_LOAD_STATE)
             self.main_log.write_log("Error: " + str(e), self, self.main_log.ERROR_STATE)
 
-    def do_que(self, que):
+    def do_request(self, request):
         try:
-            some = self.cur.execute(que)
+            request_result = self.cur.execute(request)
             self.db.commit()
-            self.main_log.write_log(f"Do some operation with database: {que}", self)
+            self.main_log.write_log(f"Do some operation with database: {request}", self)
         except Exception as e:
-            self.main_log.write_log(f"fail to do que: {que}", self, self.main_log.ERROR_STATE)
+            self.main_log.write_log(f"fail to do que: {request}", self, self.main_log.ERROR_STATE)
             return 0
-        return some
+        return request_result
