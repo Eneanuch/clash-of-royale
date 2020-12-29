@@ -8,6 +8,8 @@ class CFGManager:
         self.fm = fm
         self.cfg_main = ConfigParser()
 
+        self.load_config()
+
     def load_config(self):
         try:
             self.cfg_main.read(self.PATH_TO_CFG + 'main.cfg', encoding='utf-8')  # load config file
@@ -28,7 +30,7 @@ class CFGManager:
             self.main_log.write_log(f"Can't read '{word}' from cfg", self, self.main_log.CANT_LOAD_STATE)
             return default
 
-    def write_cfg(self, word, parameter):
+    def write_var_to_cfg(self, word, parameter):
         # set parameter (with name 'word') var 'parameter'
         self.cfg_main.set(self.GENERAL_SECTION, word, parameter)
         with open(self.PATH_TO_CFG + "main.cfg", "w", encoding="utf-8") as a:
