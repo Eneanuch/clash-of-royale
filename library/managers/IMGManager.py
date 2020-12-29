@@ -1,4 +1,6 @@
 class IMGManager:
+    PATH_TO_IMAGES = ""
+
     def __init__(self, main_log, fm):
         self.pygame = 0
         self.main_log = main_log
@@ -17,7 +19,7 @@ class IMGManager:
         if not self.pygame:
             self.main_log.write_log(f"EEEEE davai ura pygame naxui ne nuzhen davai!!!! (pygame is not loaded)", self)
             return
-        fullname = path.join('data', name)
+        fullname = path.join(self.PATH_TO_IMAGES + 'data', name)
         if self.all_images.get(fullname, 0):
             self.main_log.write_log(f"File '{fullname}' has already loaded", self)
             return self.all_images.get(fullname, 0)
