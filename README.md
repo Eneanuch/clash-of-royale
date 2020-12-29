@@ -6,7 +6,7 @@ ITs best game in the our world, it will broke play market and appstore, ETO NORM
 Далее main_log - класс для логирования, fm - FunctionManager
 На данный момент есть слудующие менеджеры с слудующими функциями:
 
-Главный менеджер
+Главный менеджер<br>
 FunctionManager(main_log, *functions) - добавляет НЕ инициализированные классы из списка functions в список функций, образуя словарь {"Имя класса": <обьект класса>}
   add_function(func) - добавляет инициализированный класс в словарь функций
   add_not_inited_function(func) - инициалиизирует класс и добавляет его в словарь функций
