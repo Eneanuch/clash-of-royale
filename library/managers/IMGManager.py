@@ -1,6 +1,3 @@
-from os import path
-
-
 class IMGManager:
     def __init__(self, main_log, fm):
         self.pygame = 0
@@ -12,10 +9,11 @@ class IMGManager:
         if not pygame:
             self.pygame = pygame
         else:
-            self.main_log.write_log(f"Pygame have already set genius", self)
+            self.main_log.write_log(f"Pygame have already set, genius", self)
         # optimization (or it will be import twice)
 
     def load_image(self, name, colorkey=None):
+        from os import path
         if not self.pygame:
             self.main_log.write_log(f"EEEEE davai ura pygame naxui ne nuzhen davai!!!! (pygame is not loaded)", self)
             return
