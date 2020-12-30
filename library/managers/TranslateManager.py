@@ -1,5 +1,5 @@
 class TranslateManager:
-    PATH_TO_TRANSLATE = ""
+    PATH_TO_TRANSLATE = "./data/translate/"
 
     def __init__(self, main_log, fm):
         from configparser import ConfigParser
@@ -14,7 +14,7 @@ class TranslateManager:
 
     def load_translate(self):
         try:
-            self.trans_main.read(self.PATH_TO_TRANSLATE, encoding='utf-8')
+            self.trans_main.read(self.PATH_TO_TRANSLATE + "main.phrases.txt", encoding='utf-8')
             self.main_log.write_log("File-translate has been loaded", self)
         except Exception as e:
             self.main_log.write_log("Can't read translate file", self, self.main_log.CANT_LOAD_STATE)

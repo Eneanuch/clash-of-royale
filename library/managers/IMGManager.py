@@ -1,5 +1,5 @@
 class IMGManager:
-    PATH_TO_IMAGES = ""
+    PATH_TO_IMAGES = "./data/images/"
 
     def __init__(self, main_log, fm):
         self.pygame = 0
@@ -8,10 +8,7 @@ class IMGManager:
         self.all_images = dict()
 
     def set_pygame(self, pygame):
-        if not pygame:
-            self.pygame = pygame
-        else:
-            self.main_log.write_log(f"Pygame have already set, genius", self)
+        self.pygame = pygame
         # optimization (or it will be import twice)
 
     def load_image(self, name, colorkey=None):
@@ -19,7 +16,7 @@ class IMGManager:
         if not self.pygame:
             self.main_log.write_log(f"EEEEE davai ura pygame naxui ne nuzhen davai!!!! (pygame is not loaded)", self)
             return
-        fullname = path.join(self.PATH_TO_IMAGES + 'data', name)
+        fullname = path.join(self.PATH_TO_IMAGES, name)
         if self.all_images.get(fullname, 0):
             self.main_log.write_log(f"File '{fullname}' has already loaded", self)
             return self.all_images.get(fullname, 0)

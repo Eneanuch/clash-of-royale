@@ -1,5 +1,5 @@
 class DBManager:
-    PATH_TO_DATABASE = ""
+    PATH_TO_DATABASE = "./data/database/"
 
     def __init__(self, main_log, fm):
         self.main_log = main_log

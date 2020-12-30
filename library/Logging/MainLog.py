@@ -14,11 +14,14 @@ class MainLog:  # it will build and write logs
     DEFAULT_STATE = 1  # its good
     NO_NAME_LOG_STATE = 1
 
-    PATH_TO_LOGS = ""
+    PATH_TO_LOGS = "./logs/"
 
     def __init__(self, print_logs, log_it):
         self.print_logs = print_logs  # is program need to print logs
         self.log_it = log_it  # do logs ?(действительно, а для кого я тогда эту хрень делаю???)
+
+        self.start_log_it = 0
+        self.file = 0
 
     def write_log(self, message, class_=NO_NAME_LOG_STATE, state=DEFAULT_STATE):
         if class_ == self.NO_NAME_LOG_STATE:
@@ -33,13 +36,11 @@ class MainLog:  # it will build and write logs
             message = f"?? {message}  ({class_.__class__.__name__}) | " \
                       f"{datetime.today().strftime('%H:%M:%S')}\n"
         if self.log_it:
-            global start_log_it
-            global file
-            if not start_log_it:
-                start_log_it = 1
-                file = open(self.PATH_TO_LOGS + 'logs.' +
-                            datetime.today().strftime('%Y-%m-%d-%H.%M.%S') + '.log',
-                            mode="w", encoding='utf-8')
-            file.write(message)
+            if not self.start_log_it:
+                self.start_log_it = 1
+                self.file = open(self.PATH_TO_LOGS + 'logs.' +
+                                 datetime.today().strftime('%Y-%m-%d-%H.%M.%S') + '.log',
+                                 mode="w", encoding='utf-8')
+            self.file.write(message)
         if self.print_logs:
             print(message[:-1])
