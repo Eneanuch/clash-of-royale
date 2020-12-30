@@ -25,10 +25,11 @@ if __name__ == '__main__':
     fm = FunctionManager.FunctionManager(main_log, CFGManager.CFGManager, DBManager.DBManager,
                                          IMGManager.IMGManager, TranslateManager.TranslateManager,
                                          SoundManager.SoundManager)
-    fm.get_function("IMGManager").set_pygame(pygame)
-
     pygame.init()
     pygame.display.set_caption(NAME + " v" + VERSION + " build " + BUILD + " " + STATUS)
+    fm.get_function("IMGManager").set_pygame(pygame)
+    fm.get_function("SoundManager").set_pygame(pygame)
+
     size = WIDTH, HEIGHT
     screen = pygame.display.set_mode(size)
     clock = pygame.time.Clock()

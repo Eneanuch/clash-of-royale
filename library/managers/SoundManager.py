@@ -8,6 +8,8 @@ class SoundManager:
         self.pygame = 0
         self.sounds = dict()
 
+        self.load_all_sounds()
+
     def set_pygame(self, pygame):
         self.pygame = pygame
         self.main_log.write_log(f"Yes! I get the pygame", self)
@@ -15,7 +17,7 @@ class SoundManager:
 
     def load_all_sounds(self):
         pass
-        # Im very lazzy .......
+        # Im so lazzy .......
 
     def load_sound(self, name):
         if not self.pygame:
@@ -29,6 +31,12 @@ class SoundManager:
             self.sounds[name].play()
         except:
             self.main_log.write_log(f"No sound '{name}' in dict", self, self.main_log.CANT_LOAD_STATE)
+
+    def stop_sound(self, name):
+        try:
+            self.sounds[name].stop()
+        except:
+            self.main_log.write_log(f"Cant stop sound '{name}'", self, self.main_log.CANT_LOAD_STATE)
 
     def delete_sound(self, name):
         try:

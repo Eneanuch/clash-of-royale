@@ -7,6 +7,8 @@ class IMGManager:
         self.fm = fm  # functions manager
         self.all_images = dict()
 
+        self.load_all_images()
+
     def set_pygame(self, pygame):
         self.pygame = pygame
         self.main_log.write_log(f"Yes! I get the pygame", self)
