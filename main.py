@@ -1,6 +1,9 @@
 from library.Logging import MainLog
-from library.managers import CFGManager, DBManager, FunctionManager,\
-    IMGManager, TranslateManager
+from library.managers import CFGManager, DBManager, FunctionManager, \
+    IMGManager, TranslateManager, SoundManager
+from os import environ
+
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
 DEBUG = True
@@ -20,7 +23,8 @@ if __name__ == '__main__':
         log_it = True
     main_log = MainLog.MainLog(print_logs, log_it)
     fm = FunctionManager.FunctionManager(main_log, CFGManager.CFGManager, DBManager.DBManager,
-                                         IMGManager.IMGManager, TranslateManager.TranslateManager)
+                                         IMGManager.IMGManager, TranslateManager.TranslateManager,
+                                         SoundManager.SoundManager)
     fm.get_function("IMGManager").set_pygame(pygame)
 
     pygame.init()
