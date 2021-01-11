@@ -25,7 +25,8 @@ class MainMenu(StateFather):
             self.draw_text(pg, self.translate.translate(i), 150, 150 + k * 30, color=color)
 
     def play_action(self, event):
-        pass
+        if event.key == self.pg.K_RETURN:
+            self.fm.get_function('StateManager').set_state(self.fm.get_function('SimpleVars').BATTLE_STATUS)
 
     def sound_action(self, event):
         if event.key == self.pg.K_RIGHT:
