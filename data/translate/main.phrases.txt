@@ -1,0 +1,11 @@
+[RU]
+    play = Играть
+    exit = Выйти
+    lang = Язык
+    sound = Звук
+
+[EN]
+    play = Play
+    exit = Exit
+    lang = Language
+    sound = Sound

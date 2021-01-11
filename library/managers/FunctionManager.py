@@ -19,10 +19,14 @@ class FunctionManager:
 
     def get_function(self, func_name):
         # its returning function (inited class)
-        self.main_log.write_log(f'returning {self.functions[func_name]} (get_func)', self)
+        # self.main_log.write_log(f'returning {self.functions[func_name]} (get_func)', self)
         return self.functions[func_name]
 
     def delete_function(self, func_name):
         # there are deleting of function (i dont now how we will use it)
         self.functions.pop(func_name)
         self.main_log.write_log(f'delete {func_name} from functions manager', self)
+
+    def get_main_log(self):
+        # returning main_log object
+        return self.main_log

@@ -8,7 +8,12 @@ class SoundManager:
         self.pygame = 0
         self.sounds = dict()
 
+        self.now_volume = 0.1
+
         self.load_all_sounds()
+
+    def load_sound_from_cfg(self):
+        pass
 
     def set_pygame(self, pygame):
         self.pygame = pygame
@@ -27,6 +32,12 @@ class SoundManager:
             return
         sound_object = self.pygame.mixer.Sound(self.PATH_TO_SOUNDS + name)
         self.sounds[name] = sound_object
+
+    def set_volume(self, volume):
+        self.pygame.mixer.set_volume(volume)
+
+    def get_volume(self):
+        return self.now_volume
 
     def play_sound(self, name):
         try:

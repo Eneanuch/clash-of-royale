@@ -8,6 +8,7 @@ class TranslateManager:
         self.trans_main = ConfigParser()
         self.language = {1: "RU", 2: "EN"}
         self.current_lang = 1
+        self.load_translate()
 
     def set_current_language(self, lang):
         self.current_lang = lang
@@ -23,11 +24,14 @@ class TranslateManager:
     def translate(self, word):
         try:
             trans = self.trans_main[self.language[self.current_lang]][word]
-            self.main_log.write_log(f"Translated '{word}' into '{trans}'", self)
+            # self.main_log.write_log(f"Translated '{word}' into '{trans}'", self)
             return trans
         except Exception as e:
             self.main_log.write_log(f"No such translate '{word}'", self, self.main_log.ERROR_STATE)
             return word
+
+    def get_now_lang(self):
+        return self.language[self.current_lang]
 
     def get_languages(self):
         return self.language
