@@ -15,8 +15,10 @@ class IMGManager:
         # optimization (or it will be import twice)
 
     def load_all_images(self):
-        pass
-        # Im very lazy....
+        from os import listdir
+        for i in listdir("./data/images/"):
+            self.load_image(i)
+        # loading all images in images dir
 
     def load_image(self, name, colorkey=None, replace_file=False):
         from os import path

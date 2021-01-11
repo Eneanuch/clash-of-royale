@@ -28,6 +28,7 @@ if __name__ == '__main__':
     pygame.init()
     pygame.display.set_caption(NAME + " v" + VERSION + " build " + BUILD + " " + STATUS)
     fm.get_function("IMGManager").set_pygame(pygame)
+    fm.get_function("IMGManager").load_all_images()
     fm.get_function("SoundManager").set_pygame(pygame)
 
     size = WIDTH, HEIGHT

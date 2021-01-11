@@ -16,8 +16,10 @@ class SoundManager:
         # getting the pygame object
 
     def load_all_sounds(self):
-        pass
-        # Im so lazzy .......
+        from os import listdir
+        for i in listdir(self.PATH_TO_SOUNDS):
+            self.load_sound(i)
+        # loading all sounds in sound dir
 
     def load_sound(self, name):
         if not self.pygame:
