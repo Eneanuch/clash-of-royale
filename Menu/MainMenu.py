@@ -21,18 +21,23 @@ class MainMenu(StateFather):
             else:
                 color = (255, 255, 255)
             if self.buttons_status[k]:
-                self.draw_text(pg, str(eval(self.buttons_status[k])), 250, 150 + k * 30)
+                self.draw_text(pg, str(eval(self.buttons_status[k])), 350, 150 + k * 30)
             self.draw_text(pg, self.translate.translate(i), 150, 150 + k * 30, color=color)
 
     def play_action(self, event):
         pass
 
     def sound_action(self, event):
-        pass
+        if event.key == self.pg.K_RIGHT:
+            self.fm.get_function('SoundManager').add_volume(0.1)
+        elif event.key == self.pg.K_LEFT:
+            self.fm.get_function('SoundManager').remove_volume(0.1)
 
     def lang_action(self, event):
-        pass
-        # if event.key == self.pg.K_
+        if event.key == self.pg.K_RIGHT:
+            self.fm.get_function('TranslateManager').revert_language()
+        elif event.key == self.pg.K_LEFT:
+            self.fm.get_function('TranslateManager').revert_language()
 
     def exit_action(self, event):
         if event.key == self.pg.K_RETURN:

@@ -35,3 +35,6 @@ class TranslateManager:
 
     def get_languages(self):
         return self.language
+
+    def revert_language(self):
+        self.current_lang = self.fm.get_function('SimpleFunctionsManager').round_round(self.current_lang + 1, 1, 2)

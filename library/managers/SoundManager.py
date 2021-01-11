@@ -34,10 +34,20 @@ class SoundManager:
         self.sounds[name] = sound_object
 
     def set_volume(self, volume):
-        self.pygame.mixer.set_volume(volume)
+        volume = self.fm.get_function('SimpleFunctionsManager').not_round_round(volume, 0, 2)
+        self.now_volume = volume
+        self.pygame.mixer.music.set_volume(volume)
+
+    def add_volume(self, volume):
+        self.now_volume += volume
+        self.set_volume(self.now_volume)
+
+    def remove_volume(self, volume):
+        self.now_volume -= volume
+        self.set_volume(self.now_volume)
 
     def get_volume(self):
-        return self.now_volume
+        return str(self.now_volume)[:3]
 
     def play_sound(self, name):
         try:
