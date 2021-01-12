@@ -5,8 +5,8 @@ class MainMenu(StateFather):
     def __init__(self, screen, pg, fm):
         super().__init__(screen, pg, fm)
 
-
         self.current_button = 0
+
         self.buttons = ["play", "sound", "lang", "exit"]
         self.buttons_status = ["",
                                "self.fm.get_function('SoundManager').get_volume()",
@@ -14,15 +14,15 @@ class MainMenu(StateFather):
                                ""]
         self.actions = [self.play_action, self.sound_action, self.lang_action, self.exit_action]
 
-    def draw(self, pg):
+    def draw(self):
         for k, i in enumerate(self.buttons):
             if self.current_button == k:
                 color = (255, 0, 0)
             else:
                 color = (255, 255, 255)
             if self.buttons_status[k]:
-                self.draw_text(pg, str(eval(self.buttons_status[k])), 350, 150 + k * 30)
-            self.draw_text(pg, self.translate.translate(i), 150, 150 + k * 30, color=color)
+                self.draw_text(self.pg, str(eval(self.buttons_status[k])), 350, 150 + k * 30)
+            self.draw_text(self.pg, self.translate.translate(i), 150, 150 + k * 30, color=color)
 
     def play_action(self, event):
         if event.key == self.pg.K_RETURN:

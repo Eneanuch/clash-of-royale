@@ -4,6 +4,7 @@ from library.managers import CFGManager, DBManager, FunctionManager, \
     SimpleFunctionsManager
 from os import environ
 from Menu.MainMenu import MainMenu
+from Menu.BattleState import BattleState
 
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
@@ -15,7 +16,7 @@ log_it = False
 
 WIDTH, HEIGHT = 500, 700
 NAME = "Clash of Royale"
-VERSION = "0.84"
+VERSION = "2.8"
 BUILD = "6"
 STATUS = "betta"
 
@@ -52,6 +53,7 @@ if __name__ == '__main__':
     fps = 60  # frames per sec
 
     main_menu = MainMenu(screen, pygame, fm)
+    battle_state = BattleState(screen, pygame, fm)
 
     fm.get_function("StateManager").add_state(main_menu)
     sm = fm.get_function("StateManager")  # state manager
@@ -60,7 +62,7 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 running = False
             sm.get_state(sm.get_current_state()).update(event)
-        sm.get_state(sm.get_current_state()).draw(pygame)
+        sm.get_state(sm.get_current_state()).draw()
         clock.tick(fps)
         pygame.display.flip()
         screen.fill((0, 0, 0))

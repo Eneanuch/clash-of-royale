@@ -11,7 +11,9 @@ class StateManager:
         self.fm.get_main_log().write_log(f"state added '{state}'", self)
 
     def set_state(self, num_state):
+        self.status[self.current_state].stop_state()
         self.current_state = num_state
+        self.status[self.current_state].start_state()
         self.fm.get_main_log().write_log(f"state setted with num '{num_state}'", self)
 
     def get_state(self, num_state):
