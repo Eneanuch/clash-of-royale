@@ -4,7 +4,7 @@ from Menu.StateFather import StateFather
 class MainMenu(StateFather):
     def __init__(self, screen, pg, fm):
         super().__init__(screen, pg, fm)
-        fm.get_main_log().write_log("Its loaded", self)
+
 
         self.current_button = 0
         self.buttons = ["play", "sound", "lang", "exit"]

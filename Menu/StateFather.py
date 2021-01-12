@@ -5,6 +5,7 @@ class StateFather:
         self.screen = screen
         self.texts = dict()
         self.translate = fm.get_function("TranslateManager")
+        fm.get_main_log().write_log("Its loaded", self)
 
     def update(self, event):
         # your code in module
