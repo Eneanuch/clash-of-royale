@@ -55,8 +55,10 @@ if __name__ == '__main__':
     main_menu = MainMenu(screen, pygame, fm)
     battle_state = BattleState(screen, pygame, fm)
 
-    fm.get_function("StateManager").add_state(main_menu)
-    sm = fm.get_function("StateManager")  # state manager
+    sm = fm.get_function("StateManager") # state manager
+    sm.add_state(main_menu)
+    sm.add_state(battle_state)
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
