@@ -9,8 +9,7 @@ class SimpleVars:
     ENEMY_TEAM_ID = 1
 
     POST_ID = 0
-
-
+    POST_HEALTH = 1000
 
     def __init__(self, main_log, fm):
         main_log.write_log("Vars loaded", self)

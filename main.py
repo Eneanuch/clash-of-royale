@@ -9,7 +9,7 @@ from Menu.BattleState import BattleState
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
-DEBUG = False
+DEBUG = True
 
 print_logs = False
 log_it = False

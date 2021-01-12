@@ -18,6 +18,7 @@ class SoundManager:
     def set_pygame(self, pygame):
         self.pygame = pygame
         self.main_log.write_log(f"Yes! I get the pygame", self)
+        self.load_all_sounds()
         # getting the pygame object
 
     def load_all_sounds(self):
@@ -31,6 +32,7 @@ class SoundManager:
             self.main_log.write_log(f"No pygame", self, self.main_log.ERROR_STATE)
             return
         sound_object = self.pygame.mixer.Sound(self.PATH_TO_SOUNDS + name)
+        self.main_log.write_log(f"Sound has been loaded '{name}'", self)
         self.sounds[name] = sound_object
 
     def set_volume(self, volume):

@@ -13,15 +13,15 @@ class BattleState(StateFather):
         self.player_elix = 50
         self.bot_elix = 50
 
-    def init_entities(self):
-        for i in range(self.now_wave):
-           pass
-
     def update(self, event):
         super().update(event)
+        self.enemy_entity.update(event)
+        self.player_entity.update(event)
 
     def draw(self):
         super().draw()
+        self.enemy_entity.draw(self.screen)
+        self.player_entity.draw(self.screen)
 
     def get_enemy_group(self):
         return self.enemy_entity
