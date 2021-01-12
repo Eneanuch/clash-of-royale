@@ -3,9 +3,10 @@
     exit = Выйти
     lang = Язык
     sound = Звук
-
+    enemy = Враг
 [EN]
     play = Play
     exit = Exit
     lang = Language
     sound = Sound
+    enemy = Enemy

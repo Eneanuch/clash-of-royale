@@ -1,6 +1,7 @@
 from pygame.sprite import AbstractGroup, Sprite
 from pygame.sprite import spritecollideany
 
+
 class Entity(Sprite):
     image_name = "entity.png"
 
