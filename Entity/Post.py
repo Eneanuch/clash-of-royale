@@ -1,5 +1,5 @@
 from pygame.sprite import AbstractGroup
-
+from random import randint
 from Entity.Entity import Entity
 
 
@@ -11,5 +11,8 @@ class Post(Entity):
         self.time_space = 20
         self.speed = 0
 
-        self.image_name = "post.png"
+        # self.image_name = f"post{randint(0, 1)}.png"
+        self.image_name = "post1.png"
+        self.all_animations = ["idle"]
+        self.all_animations_sprites = [1]
         self.sprite_init()

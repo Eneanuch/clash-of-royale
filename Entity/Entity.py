@@ -44,8 +44,6 @@ class Entity(Sprite):
 
         self.now_animation = 0
 
-        self.sprite_init()
-
     def sprite_init(self):
         self.image = self.fm.get_function("IMGManager").load_image(self.image_name)
         self.rect = self.image.get_rect()
@@ -90,7 +88,7 @@ class Entity(Sprite):
             self.life_state = 0
             self.now_animation = 2
 
-    def update(self):
+    def update(self, event):
         self.check_death()
         self.now_time += 1
         if self.time_space == self.now_time:

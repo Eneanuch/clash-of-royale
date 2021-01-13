@@ -14,7 +14,7 @@ DEBUG = True
 print_logs = False
 log_it = False
 
-WIDTH, HEIGHT = 500, 700
+WIDTH, HEIGHT = 800, 400
 NAME = "Clash of Royale"
 VERSION = "2.8"
 BUILD = "6"
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     main_menu = MainMenu(screen, pygame, fm)
     battle_state = BattleState(screen, pygame, fm)
 
-    sm = fm.get_function("StateManager") # state manager
+    sm = fm.get_function("StateManager")  # state manager
     sm.add_state(main_menu)
     sm.add_state(battle_state)
 

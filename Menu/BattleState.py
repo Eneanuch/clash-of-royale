@@ -1,4 +1,5 @@
 from Menu.StateFather import StateFather
+from Entity.Post import Post
 
 
 class BattleState(StateFather):
@@ -7,6 +8,8 @@ class BattleState(StateFather):
 
         self.enemy_entity = pg.sprite.Group()
         self.player_entity = pg.sprite.Group()
+
+        self.player_post = Post(0, 0, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.player_entity)
 
         self.now_wave = 1
 

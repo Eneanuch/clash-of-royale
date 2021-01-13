@@ -21,8 +21,8 @@ class MainMenu(StateFather):
             else:
                 color = (255, 255, 255)
             if self.buttons_status[k]:
-                self.draw_text(self.pg, str(eval(self.buttons_status[k])), 350, 150 + k * 30)
-            self.draw_text(self.pg, self.translate.translate(i), 150, 150 + k * 30, color=color)
+                self.draw_text(self.pg, str(eval(self.buttons_status[k])), 350, 100 + k * 30)
+            self.draw_text(self.pg, self.translate.translate(i), 150, 100 + k * 30, color=color)
 
     def play_action(self, event):
         if event.key == self.pg.K_RETURN:
