@@ -3,16 +3,27 @@ class StateFather:
         self.fm = fm
         self.pg = pg
         self.screen = screen
+
         self.texts = dict()
+        self.is_started = False
+
         self.translate = fm.get_function("TranslateManager")
+
+        fm.get_main_log().write_log("Its loaded", self)
 
     def update(self, event):
         # your code in module
         pass
 
-    def draw(self, pygame):
+    def draw(self):
         # your code in module
         pass
+
+    def stop_state(self):
+        self.is_started = False
+
+    def start_state(self):
+        self.is_started = True
 
     def draw_text(self, pg, text, x, y, font="Comic Sans MS", size=30, color=(255, 255, 255)):
         # default drawing text
