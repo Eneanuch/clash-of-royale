@@ -31,6 +31,7 @@ class MainMenu(StateFather):
     def sound_action(self, event):
         if event.key == self.pg.K_RIGHT:
             self.fm.get_function('SoundManager').add_volume(0.1)
+            self.fm.get_function('SoundManager').set_volume(self.fm.get_function('SoundManager').now_volume)
             self.fm.get_function('SoundManager').play_sound('replace.mp3')
         elif event.key == self.pg.K_LEFT:
             self.fm.get_function('SoundManager').remove_volume(0.1)

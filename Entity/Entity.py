@@ -82,7 +82,7 @@ class Entity(Sprite):
         entity.give_damage(self.damage)
 
     def check_death(self):
-        self.hp = self.fm.get_function('SimpleFunctionsManger')\
+        self.hp = self.fm.get_function('SimpleFunctionsManager')\
             .not_round_round(self.hp, 0, self.max_hp)
         if self.hp == 0:
             self.life_state = 0

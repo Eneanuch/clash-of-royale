@@ -12,7 +12,7 @@ class Post(Entity):
         self.speed = 0
 
         # self.image_name = f"post{randint(0, 1)}.png"
-        self.image_name = "post1.png"
+        self.image_name = f"tower{team_id}.png"
         self.all_animations = ["idle"]
         self.all_animations_sprites = [1]
         self.sprite_init()
