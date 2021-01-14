@@ -107,7 +107,7 @@ class BattleState(StateFather):
         elif not self.enemy_post.life_state:
             self.end_status = 0
             if not self.do_score:
-                self.fm.get_function("DBManager").\
+                self.fm.get_function("DBManager"). \
                     do_request(f"INSERT INTO main (score) VALUES({self.score})")
                 self.do_score = 1
 

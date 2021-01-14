@@ -104,7 +104,7 @@ class Entity(Sprite):
             if len(self.all_animations_file) > 2:
                 self.now_animation = 2
             else:
-                self.kill()
+                self.remove()
 
     def update(self, event):
         self.check_death()

@@ -108,9 +108,8 @@ class SoundManager:
         self.effects = not self.effects
 
     def get_effect(self):
-        return self.fm.get_function('TranslateManager').translate("yes") if self.effects\
+        return self.fm.get_function('TranslateManager').translate("yes") if self.effects \
             else self.fm.get_function('TranslateManager').translate("no")
 
     def get_effects_int(self):
         return int(self.effects)
-
