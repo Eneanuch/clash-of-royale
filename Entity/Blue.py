@@ -10,7 +10,7 @@ class Blue(Entity):
         self.time_space = 10
         self.speed = 8
 
-        self.image_name = '3nice.png'
+        self.image_name = 'blue.png'
         self.all_animations = ['walk', 'death', 'attack']
         self.all_animations_sprites = [6, 6, 6]
         self.sprite_init()

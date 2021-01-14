@@ -37,6 +37,7 @@ class BattleState(StateFather):
         self.choose_line[0].set_selected(True)
 
         self.player_elix = 50
+        self.bot_elix = 50
 
         self.background_sprite = pg.sprite.Sprite(self.background_group)
         self.background_sprite.image = fm.get_function("IMGManager").load_image("back_default.png")
@@ -65,20 +66,11 @@ class BattleState(StateFather):
                 if event.type == self.pg.MOUSEBUTTONDOWN:
                     pos = self.pg.mouse.get_pos()
                     if event.button == 1:
-                        if 150 <= pos[0] <= 400 and 30 <= pos[1] <= 200:
-                            # checking of able to spawn entity
-                            Grib.Grib(*pos, self.fm, self, self.fm.get_function("SimpleVars").PLAYER_TEAM_ID,
-                                      self.void_entity)
-        if event:
-            if event.type == self.pg.KEYDOWN:
-                if event.key == self.pg.K_ESCAPE:
-                    # if user want to exit
-                    self.fm.get_function('StateManager'). \
-                        remove_state(self.fm.get_function('SimpleVars').BATTLE_STATUS)
-                    self.fm.get_function('StateManager'). \
-                        add_state(BattleState(self.screen, self.pg, self.fm))
-                    self.fm.get_function('StateManager'). \
-                        set_state(self.fm.get_function('SimpleVars').MAIN_MENU_STATUS)
+                        if 150 <= pos[0] <= 400 and pos[1] <= 300:
+                            now = [Grib.Grib, Purple.Purple, Blue.Blue, Flying.Flying]
+                            index = max([i.is_selected() for i in self.choose_line])
+                            now[index](pos[0] - 35, pos[1] - 35, self.fm, self,
+                                       self.fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.void_entity)
 
         if self.now_time == self.bot_kd:
             # bot intelligent

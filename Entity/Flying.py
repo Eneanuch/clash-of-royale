@@ -7,10 +7,10 @@ class Flying(Entity):
         super().__init__(x, y, fm, bs, team_id, *groups)
         self.damage = 70
         self.max_hp = 200
-        self.time_space = 45
-        self.speed = 8
+        self.time_space = 5
+        self.speed = 3
 
-        self.image_name = '4nice.png'
+        self.image_name = 'flying.png'
         self.all_animations = ['walk', 'death', 'attack']
-        self.all_animations_sprites = [4, 5, 4]
+        self.all_animations_sprites = [4, 4, 5]
         self.sprite_init()

@@ -10,7 +10,7 @@ class Purple(Entity):
         self.time_space = 20
         self.speed = 10
 
-        self.image_name = '2nice.png'
-        self.all_animations = ['walk', 'death', 'attack']
-        self.all_animations_sprites = [6, 5, 4]
+        self.image_name = 'purple.png'
+        self.all_animations = ['walk', 'attack', 'death']
+        self.all_animations_sprites = [6, 4, 5]
         self.sprite_init()
