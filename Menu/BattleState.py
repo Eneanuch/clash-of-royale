@@ -60,7 +60,7 @@ class BattleState(StateFather):
                 if event.type == self.pg.MOUSEBUTTONDOWN:
                     pos = self.pg.mouse.get_pos()
                     if event.button == 1:
-                        if 150 <= pos[0] <= 400 and pos[1] <= 300:
+                        if 150 <= pos[0] <= 400 and 30 <= pos[1] <= 200:
                             Grib.Grib(*pos, self.fm, self, self.fm.get_function("SimpleVars").PLAYER_TEAM_ID,
                                       self.void_entity)
 

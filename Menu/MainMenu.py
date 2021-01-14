@@ -15,13 +15,13 @@ class MainMenu(StateFather):
         self.background_sprite.rect.x = 0
         self.background_sprite.rect.y = 0
 
-        self.buttons = ["play", "difficult",  "sound", "lang", "exit"]
+        self.buttons = ["play", "difficult",  "sound", "lang"]
         self.buttons_status = ["",
                                "self.fm.get_function('DiffManager').get_diff()",
                                "self.fm.get_function('SoundManager').get_volume()",
                                "self.fm.get_function('TranslateManager').get_now_lang()",
-                               ""]
-        self.actions = [self.play_action, self.diff_action, self.sound_action, self.lang_action, self.exit_action]
+                                ]
+        self.actions = [self.play_action, self.diff_action, self.sound_action, self.lang_action]
 
     def draw(self):
         self.background_group.draw(self.screen)
@@ -67,10 +67,6 @@ class MainMenu(StateFather):
         elif event.key == self.pg.K_LEFT:
             self.fm.get_function('TranslateManager').revert_language()
             self.fm.get_function('SoundManager').play_sound('replace.mp3')
-
-    def exit_action(self, event):
-        if event.key == self.pg.K_RETURN:
-            exit()
 
     def update(self, event):
         if event:
