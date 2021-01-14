@@ -67,7 +67,7 @@ class BattleState(StateFather):
                 if event.type == self.pg.MOUSEBUTTONDOWN:
                     pos = self.pg.mouse.get_pos()
                     if event.button == 1:
-                        if 150 <= pos[0] <= 400 and pos[1] <= 300:
+                        if 150 <= pos[0] <= 400 and pos[1] <= 230:
                             now = [Grib.Grib, Purple.Purple, Blue.Blue, Flying.Flying]
                             index = max([i.is_selected() for i in self.choose_line])
                             price = [4.0, 4.0, 2.0, 5.0]
