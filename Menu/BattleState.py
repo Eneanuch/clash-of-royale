@@ -64,12 +64,11 @@ class BattleState(StateFather):
             self.player_entity.draw(self.screen)
             self.low_line.draw(self.screen)
         else:
-            win_text = ""
             if self.end_status == self.fm.get_function("SimpleVars").PLAYER_WIN_STATE:
                 win_text = self.translate.translate("player_win")
             else:
                 win_text = self.translate.translate("player_lose")
-            self.draw_text(self.pg, win_text, 250, 150)
+            self.draw_text(self.pg, win_text, 120, 300)
 
     def get_enemy_group(self):
         return self.enemy_entity
