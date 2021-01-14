@@ -4,8 +4,8 @@
     lang = Язык
     sound = Звук
     enemy = Враг
-    player_win = Вы победил!!
-    player_lose = Вы проиграли!!
+    player_win = Вы победили!!!
+    player_lose = Вы проиграли!!!
     difficult = Сложность
 [EN]
     play = Play
@@ -13,6 +13,6 @@
     lang = Language
     sound = Sound
     enemy = Enemy
-    player_win = You are winner!!
-    player_lose = You are losser!!
+    player_win = You are winner!!!
+    player_lose = You are loser!!!
     difficult = Difficulty

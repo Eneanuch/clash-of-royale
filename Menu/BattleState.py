@@ -1,6 +1,5 @@
 from Menu.StateFather import StateFather
-from Entity.Post import Post
-from Entity import Grib
+from Entity import Post, Grib, Blue, Purple, Flying
 from Low_line.Elixir import Elixir
 from Low_line.Choose_line import Choose_line
 
@@ -24,8 +23,8 @@ class BattleState(StateFather):
         self.low_line = pg.sprite.Group()
         self.background_group = pg.sprite.Group()
 
-        self.player_post = Post(10, 70, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.void_entity)
-        self.enemy_post = Post(650, 70, fm, self, fm.get_function("SimpleVars").ENEMY_TEAM_ID, self.void_entity)
+        self.player_post = Post.Post(10, 70, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.void_entity)
+        self.enemy_post = Post.Post(650, 70, fm, self, fm.get_function("SimpleVars").ENEMY_TEAM_ID, self.void_entity)
 
         self.elixir = Elixir(self.player_entity)
         images = [f'{i + 1}pre.png' for i in range(4)]

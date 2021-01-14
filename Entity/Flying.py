@@ -2,7 +2,7 @@ from pygame.sprite import AbstractGroup
 from Entity.Entity import Entity
 
 
-class Grib(Entity):
+class Flying(Entity):
     def __init__(self, x, y, fm, bs, team_id, *groups: AbstractGroup):
         super().__init__(x, y, fm, bs, team_id, *groups)
         self.damage = 70
