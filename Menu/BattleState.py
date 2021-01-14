@@ -9,6 +9,8 @@ class BattleState(StateFather):
         super().__init__(screen, pg, fm)
         self.fm = fm
 
+        self.end_status = -1
+
         self.enemy_entity = pg.sprite.Group()
         self.player_entity = pg.sprite.Group()
         self.low_line = pg.sprite.Group()
@@ -34,31 +36,40 @@ class BattleState(StateFather):
 
     def update(self, event):
         super().update(event)
-        self.enemy_entity.update(event)
-        self.player_entity.update(event)
-        if event.type == self.pg.KEYUP:
-            index = max([i.is_selected() for i in self.choose_line])
-            self.choose_line[index].set_selected(False)
-            if event.key == self.pg.K_RIGHT:
-                index = (index + 1) % 4
-                self.fm.get_function('SoundManager').play_sound('menu.mp3')
-            elif event.key == self.pg.K_LEFT:
-                index = (index - 1) % 4
-                self.fm.get_function('SoundManager').play_sound('menu.mp3')
-            self.choose_line[index].set_selected(True)
-        if event.type == self.pg.MOUSEBUTTONDOWN:
-            pos = self.pg.mouse.get_pos()
-            if event.button == 1:
-                if pos[0] <= 400:
-                    pass
-                    # spawn entity
+        if self.end_status == -1:
+            self.enemy_entity.update(event)
+            self.player_entity.update(event)
+            if event.type == self.pg.KEYUP:
+                index = max([i.is_selected() for i in self.choose_line])
+                self.choose_line[index].set_selected(False)
+                if event.key == self.pg.K_RIGHT:
+                    index = (index + 1) % 4
+                    self.fm.get_function('SoundManager').play_sound('menu.mp3')
+                elif event.key == self.pg.K_LEFT:
+                    index = (index - 1) % 4
+                    self.fm.get_function('SoundManager').play_sound('menu.mp3')
+                self.choose_line[index].set_selected(True)
+            if event.type == self.pg.MOUSEBUTTONDOWN:
+                pos = self.pg.mouse.get_pos()
+                if event.button == 1:
+                    if pos[0] <= 400:
+                        pass
+                        # spawn entity
 
     def draw(self):
         super().draw()
-        self.background_group.draw(self.screen)
-        self.enemy_entity.draw(self.screen)
-        self.player_entity.draw(self.screen)
-        self.low_line.draw(self.screen)
+        if self.end_status == -1:
+            self.background_group.draw(self.screen)
+            self.enemy_entity.draw(self.screen)
+            self.player_entity.draw(self.screen)
+            self.low_line.draw(self.screen)
+        else:
+            win_text = ""
+            if self.end_status == self.fm.get_function("SimpleVars").PLAYER_WIN_STATE:
+                win_text = self.translate.translate("player_win")
+            else:
+                win_text = self.translate.translate("player_lose")
+            self.draw_text(self.pg, win_text, 250, 150)
 
     def get_enemy_group(self):
         return self.enemy_entity
