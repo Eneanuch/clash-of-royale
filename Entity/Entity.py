@@ -87,7 +87,10 @@ class Entity(Sprite):
             .not_round_round(self.hp, 0, self.max_hp)
         if self.hp == 0:
             self.life_state = 0
-            self.now_animation = 2
+            if len(self.all_animations_file) > 1:
+                self.now_animation = 2
+            else:
+                self.kill()
 
     def update(self, event):
         self.check_death()
@@ -98,9 +101,11 @@ class Entity(Sprite):
                 # for walk
                 collide_sprite = spritecollideany(self, self.battle_state.get_not_my_group(self.team_id))
                 # can to attack?
-                if collide_sprite:
+                # print(collide_sprite.__class__.__name__)
+                if collide_sprite and self.damage:
                     collide_sprite.give_damage(self.damage)
-                    self.now_animation = 1
+                    if len(self.all_animations_file) > 1:
+                        self.now_animation = 1
                     self.tick_of_animation = 0
             if self.now_animation == 1:
                 if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
