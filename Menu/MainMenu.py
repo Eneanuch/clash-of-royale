@@ -7,6 +7,14 @@ class MainMenu(StateFather):
 
         self.current_button = 0
 
+        self.background_group = pg.sprite.Group()
+
+        self.background_sprite = pg.sprite.Sprite(self.background_group)
+        self.background_sprite.image = fm.get_function("IMGManager").load_image("menu.png")
+        self.background_sprite.rect = self.background_sprite.image.get_rect()
+        self.background_sprite.rect.x = 0
+        self.background_sprite.rect.y = 0
+
         self.buttons = ["play", "sound", "lang", "exit"]
         self.buttons_status = ["",
                                "self.fm.get_function('SoundManager').get_volume()",
@@ -15,6 +23,7 @@ class MainMenu(StateFather):
         self.actions = [self.play_action, self.sound_action, self.lang_action, self.exit_action]
 
     def draw(self):
+        self.background_group.draw(self.screen)
         for k, i in enumerate(self.buttons):
             if self.current_button == k:
                 color = (255, 0, 0)
