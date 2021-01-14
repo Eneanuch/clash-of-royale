@@ -7,6 +7,9 @@
     player_win = Вы победили!!!
     player_lose = Вы проиграли!!!
     difficult = Сложность
+    yes = Да
+    no = Нет
+    effects = Зв. эффекты
 [EN]
     play = Play
     exit = Exit
@@ -16,3 +19,6 @@
     player_win = You are winner!!!
     player_lose = You are loser!!!
     difficult = Difficulty
+    yes = Yes
+    no = No
+    effects = Snd. Effects

@@ -9,6 +9,7 @@ class SoundManager:
         self.sounds = dict()
 
         self.now_volume = 0.1
+        self.effects = True
 
         self.load_all_sounds()
 
@@ -18,6 +19,7 @@ class SoundManager:
         if self.pygame:
             self.now_volume = float(self.fm.get_function("CFGManager").read_var_from_cfg("sound", "0.1"))
             self.pygame.mixer.music.set_volume(float(self.now_volume))
+            self.effects = int(self.fm.get_function("CFGManager").read_var_from_cfg("effects", "0"))
 
     def set_pygame(self, pygame):
         self.pygame = pygame
@@ -61,10 +63,11 @@ class SoundManager:
         return str(self.now_volume)[:3]
 
     def play_sound(self, name):
-        try:
-            self.sounds[name].play()
-        except:
-            self.main_log.write_log(f"No sound '{name}' in dict", self, self.main_log.CANT_LOAD_STATE)
+        if self.effects:
+            try:
+                self.sounds[name].play()
+            except:
+                self.main_log.write_log(f"No sound '{name}' in dict", self, self.main_log.CANT_LOAD_STATE)
 
     def stop_sound(self, name):
         try:
@@ -88,7 +91,8 @@ class SoundManager:
         except:
             self.main_log.write_log(f"Can't stop (may be no sound playing now)", self, self.main_log.ERROR_STATE)
         self.pygame.mixer.music.load(self.PATH_TO_SOUNDS + name)
-        self.pygame.mixer.music.play(-1, 0.0)  # -1 means that this one will be endless,
+        self.pygame.mixer.music.play(-1, 0.0)
+        # -1 means that this one will be endless,
         # 0.0 its time of begining of playing sound
 
     def stop_background_sound(self):
@@ -99,3 +103,14 @@ class SoundManager:
             self.pygame.mixer.music.stop()
         except:
             self.main_log.write_log(f"Can't stop (may be no sound playing now)", self, self.main_log.ERROR_STATE)
+
+    def revert_effect(self):
+        self.effects = not self.effects
+
+    def get_effect(self):
+        return self.fm.get_function('TranslateManager').translate("yes") if self.effects\
+            else self.fm.get_function('TranslateManager').translate("no")
+
+    def get_effects_int(self):
+        return int(self.effects)
+

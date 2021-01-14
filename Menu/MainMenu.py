@@ -15,13 +15,16 @@ class MainMenu(StateFather):
         self.background_sprite.rect.x = 0
         self.background_sprite.rect.y = 0
 
-        self.buttons = ["play", "difficult",  "sound", "lang"]
+        self.buttons = ["play", "difficult",  "sound", "effects",  "lang"]
         self.buttons_status = ["",
                                "self.fm.get_function('DiffManager').get_diff()",
                                "self.fm.get_function('SoundManager').get_volume()",
+                               "self.fm.get_function('SoundManager').get_effect()",
                                "self.fm.get_function('TranslateManager').get_now_lang()",
                                 ]
-        self.actions = [self.play_action, self.diff_action, self.sound_action, self.lang_action]
+        self.actions = [self.play_action, self.diff_action, self.sound_action, self.effects_action, self.lang_action]
+
+        self.start_state()
 
     def draw(self):
         self.background_group.draw(self.screen)
@@ -36,6 +39,12 @@ class MainMenu(StateFather):
             if self.buttons_status[k]:
                 self.draw_text(self.pg, str(eval(self.buttons_status[k])), 350, 100 + k * 30)
             self.draw_text(self.pg, self.translate.translate(i), 150, 100 + k * 30, color=color)
+
+    def effects_action(self, event):
+        if event.key == self.pg.K_RIGHT:
+            self.fm.get_function('SoundManager').revert_effect()
+        elif event.key == self.pg.K_LEFT:
+            self.fm.get_function('SoundManager').revert_effect()
 
     def play_action(self, event):
         if event.key == self.pg.K_RETURN:
@@ -81,3 +90,11 @@ class MainMenu(StateFather):
                     self.actions[self.current_button](event)
                 self.current_button = self.fm.get_function("SimpleFunctionsManager"). \
                     round_round(self.current_button, 0, len(self.buttons) - 1)
+
+    def start_state(self):
+        super().start_state()
+        self.fm.get_function('SoundManager').play_background_sound('background_menu.mp3')
+
+    def stop_state(self):
+        super().stop_state()
+        self.fm.get_function('SoundManager').play_background_sound()

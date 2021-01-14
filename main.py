@@ -9,7 +9,7 @@ from Menu.BattleState import BattleState
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
-DEBUG = False
+DEBUG = True
 
 print_logs = False
 log_it = False
@@ -65,8 +65,15 @@ if __name__ == '__main__':
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                fm.get_function("CFGManager").write_var_to_cfg("sound", fm.get_function("SoundManager").get_volume())
-                fm.get_function("CFGManager").write_var_to_cfg("lang", fm.get_function("TranslateManager").get_curr())
+                fm.get_function("CFGManager").write_var_to_cfg(
+                    "sound",
+                    fm.get_function("SoundManager").get_volume())
+                fm.get_function("CFGManager").write_var_to_cfg(
+                    "lang",
+                    fm.get_function("TranslateManager").get_curr())
+                fm.get_function("CFGManager").write_var_to_cfg(
+                    "effects",
+                    str(fm.get_function("SoundManager").get_effects_int()))
                 fm.get_function("DiffManager").save_diff()
                 running = False
             some_event = event
