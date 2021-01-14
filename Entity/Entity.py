@@ -60,7 +60,7 @@ class Entity(Sprite):
 
         for j in range(rows):
             some_anim = list()
-            for i in range(columns):
+            for i in range(self.all_animations_sprites[j]):
                 frame_location = (self.rect.w * i, self.rect.h * j)
                 some_anim.append(self.image.subsurface(
                     Rect(frame_location, self.rect.size)))
@@ -114,6 +114,7 @@ class Entity(Sprite):
             self.tick_of_animation % len(self.all_animations_file[self.now_animation])]
         if self.time_space == self.now_time:
             self.now_time = 0
+
             if self.now_animation == 0:
                 # for walk
                 collide_sprite = spritecollideany(self, self.battle_state.get_not_my_group(self.team_id))
@@ -125,6 +126,10 @@ class Entity(Sprite):
                         self.now_animation = 1
                         # change to attack
                     self.tick_of_animation = 0
+            if self.now_animation == 0:
+                self.rect.x += self.speed \
+                    if self.fm.get_function("SimpleVars").PLAYER_TEAM_ID == self.team_id \
+                    else -self.speed
             if self.now_animation == 1:
                 # print("attack")
                 if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
@@ -136,7 +141,3 @@ class Entity(Sprite):
 
             # changing sprite
             self.tick_of_animation += 1
-            if self.now_animation == 0:
-                self.rect.x += self.speed \
-                    if self.fm.get_function("SimpleVars").PLAYER_TEAM_ID == self.team_id \
-                    else -self.speed

@@ -5,7 +5,7 @@ from Entity.Entity import Entity
 class Grib(Entity):
     def __init__(self, x, y, fm, bs, team_id, *groups: AbstractGroup):
         super().__init__(x, y, fm, bs, team_id, *groups)
-        self.damage = 80
+        self.damage = 10
         self.max_hp = 180
         self.time_space = 20
         self.speed = 5

@@ -66,9 +66,15 @@ class BattleState(StateFather):
                                       self.void_entity)
 
         if self.now_time == self.bot_kd:
-            for i in range(self.diff * 3):
+            # bot intelligent
+            if self.diff <= 5:
+                for i in range(self.diff * 3):
+                    pass
+                    # ему похуй, расставляет по рандому
+                self.now_time = 0
+            else:
                 pass
-            self.now_time = 0
+                # расставляет в зависимости от расстановки врагов противника
         if not self.player_post.life_state:
             self.end_status = 1
         elif not self.enemy_post.life_state:

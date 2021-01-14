@@ -1,4 +1,0 @@
-Sound Manager: load sound from cfg
-Language Manager: load lang from cfg
-Main Menu: add soundtrack
-Main Menu: add background image
