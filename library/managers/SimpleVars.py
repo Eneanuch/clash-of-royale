@@ -11,5 +11,7 @@ class SimpleVars:
     POST_ID = 0
     POST_HEALTH = 1000
 
+    PLAYER_WIN_STATE = 0
+
     def __init__(self, main_log, fm):
         main_log.write_log("Vars loaded", self)

@@ -4,9 +4,13 @@
     lang = Язык
     sound = Звук
     enemy = Враг
+    player_win = Вы победил!!
+    player_lose = Вы проиграли!!
 [EN]
     play = Play
     exit = Exit
     lang = Language
     sound = Sound
     enemy = Enemy
+    player_win = You are winner!!
+    player_lose = You are losser!!

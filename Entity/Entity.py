@@ -126,4 +126,6 @@ class Entity(Sprite):
                 self.tick_of_animation % len(self.all_animations_file[self.now_animation])]
             self.tick_of_animation += 1
             if self.now_animation == 0:
-                self.rect.x += self.speed
+                self.rect.x += self.speed \
+                    if self.fm.get_function("SimpleVars").PLAYER_TEAM_ID == self.team_id\
+                    else -self.speed
