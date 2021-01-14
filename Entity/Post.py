@@ -11,6 +11,9 @@ class Post(Entity):
         self.time_space = 20
         self.speed = 0
 
+        self.sprite_width = 150
+        self.sprite_height = 150
+
         # self.image_name = f"post{randint(0, 1)}.png"
         self.image_name = f"tower{team_id}.png"
         self.all_animations = ["idle"]

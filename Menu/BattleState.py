@@ -23,7 +23,7 @@ class BattleState(StateFather):
         self.background_group = pg.sprite.Group()
 
         self.player_post = Post(10, 70, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.player_entity)
-        self.enemy_post = Post(650, 70, fm, self, 1, self.player_entity)
+        self.enemy_post = Post(650, 70, fm, self, fm.get_function("SimpleVars").ENEMY_TEAM_ID, self.player_entity)
         self.elixir = Elixir(self.player_entity)
         images = [f'{i + 1}pre.png' for i in range(4)]
         self.choose_line = [Choose_line(4, images, i, fm, self.low_line) for i in range(4)]
@@ -59,7 +59,7 @@ class BattleState(StateFather):
                 if event.type == self.pg.MOUSEBUTTONDOWN:
                     pos = self.pg.mouse.get_pos()
                     if event.button == 1:
-                        if pos[0] <= 400:
+                        if 150 <= pos[0] <= 400 and pos[1] <= 300:
                             Grib.Grib(*pos, self.fm, self, self.fm.get_function("SimpleVars").PLAYER_TEAM_ID,
                                       self.player_entity)
 

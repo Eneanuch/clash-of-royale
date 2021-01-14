@@ -7,7 +7,7 @@ class Grib(Entity):
         super().__init__(x, y, fm, bs, team_id, *groups)
         self.damage = 80
         self.max_hp = 180
-        self.time_space = 10
+        self.time_space = 20
         self.speed = 5
 
         self.sprite_width = 70
