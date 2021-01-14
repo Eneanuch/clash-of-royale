@@ -78,14 +78,11 @@ class BattleState(StateFather):
 
         if self.now_time == self.bot_kd:
             # bot intelligent
-            if self.diff <= 5:
-                for i in range(int(self.diff // 2)):
-                    from random import choice, randint
-                    en_entity = choice(self.all_types_of_entities)
-                    x, y = randint(500, 600), randint(30, 200)
-                    en_entity(x, y, self.fm, self, self.fm.get_function("SimpleVars").ENEMY_TEAM_ID)
-            else:
-                pass
+            for i in range(int(self.diff // 2)):
+                from random import choice, randint
+                en_entity = choice(self.all_types_of_entities)
+                x, y = randint(500, 600), randint(30, 200)
+                en_entity(x, y, self.fm, self, self.fm.get_function("SimpleVars").ENEMY_TEAM_ID)
                 # расставляет в зависимости от расстановки врагов противника
             self.now_time = 0
         if not self.player_post.life_state:
