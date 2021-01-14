@@ -17,13 +17,16 @@ class BattleState(StateFather):
         self.diff = int(fm.get_function("DiffManager").get_diff())
         self.bot_kd = 360 // self.diff
 
+        self.void_entity = pg.sprite.Group()
+
         self.enemy_entity = pg.sprite.Group()
         self.player_entity = pg.sprite.Group()
         self.low_line = pg.sprite.Group()
         self.background_group = pg.sprite.Group()
 
-        self.player_post = Post(10, 70, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.player_entity)
-        self.enemy_post = Post(650, 70, fm, self, fm.get_function("SimpleVars").ENEMY_TEAM_ID, self.player_entity)
+        self.player_post = Post(10, 70, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.void_entity)
+        self.enemy_post = Post(650, 70, fm, self, fm.get_function("SimpleVars").ENEMY_TEAM_ID, self.void_entity)
+
         self.elixir = Elixir(self.player_entity)
         images = [f'{i + 1}pre.png' for i in range(4)]
         self.choose_line = [Choose_line(4, images, i, fm, self.low_line) for i in range(4)]
@@ -61,7 +64,7 @@ class BattleState(StateFather):
                     if event.button == 1:
                         if 150 <= pos[0] <= 400 and pos[1] <= 300:
                             Grib.Grib(*pos, self.fm, self, self.fm.get_function("SimpleVars").PLAYER_TEAM_ID,
-                                      self.player_entity)
+                                      self.void_entity)
 
         if self.now_time == self.bot_kd:
             for i in range(self.diff * 3):

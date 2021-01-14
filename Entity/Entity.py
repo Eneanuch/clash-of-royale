@@ -71,6 +71,14 @@ class Entity(Sprite):
                     self.all_animations_file[k][k1],
                     self.fm.get_function("SimpleVars").PLAYER_TEAM_ID == self.team_id,
                     False)
+        self.on_full_load()
+
+    def on_full_load(self):
+        self.update(None)
+        if self.team_id == self.fm.get_function("SimpleVars").PLAYER_TEAM_ID:
+            self.battle_state.player_entity.add(self)
+        else:
+            self.battle_state.enemy_entity.add(self)
 
     def set_health(self, hp):
         self.hp = hp
