@@ -45,6 +45,10 @@ if __name__ == '__main__':
     fm.get_function("IMGManager").set_pygame(pygame)
     fm.get_function("SoundManager").set_pygame(pygame)
 
+    # window icon
+    icon = pygame.image.load('./data/images/icon.png')
+    pygame.display.set_icon(icon)
+
     # setting up the window
     size = WIDTH, HEIGHT
     screen = pygame.display.set_mode(size)
