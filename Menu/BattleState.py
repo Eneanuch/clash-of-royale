@@ -12,6 +12,7 @@ class BattleState(StateFather):
         self.enemy_entity = pg.sprite.Group()
         self.player_entity = pg.sprite.Group()
         self.low_line = pg.sprite.Group()
+        self.background_group = pg.sprite.Group()
 
         self.player_post = Post(10, 70, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.player_entity)
         self.enemy_post = Post(650, 70, fm, self, 1, self.player_entity)
@@ -24,6 +25,12 @@ class BattleState(StateFather):
 
         self.player_elix = 50
         self.bot_elix = 50
+
+        self.background_sprite = pg.sprite.Sprite(self.background_group)
+        self.background_sprite.image = fm.get_function("IMGManager").load_image("background.png")
+        self.background_sprite.rect = self.background_sprite.image.get_rect()
+        self.background_sprite.rect.x = 0
+        self.background_sprite.rect.y = 0
 
     def update(self, event):
         super().update(event)
@@ -42,9 +49,11 @@ class BattleState(StateFather):
 
     def draw(self):
         super().draw()
+        self.background_group.draw(self.screen)
         self.enemy_entity.draw(self.screen)
         self.player_entity.draw(self.screen)
         self.low_line.draw(self.screen)
+
 
     def get_enemy_group(self):
         return self.enemy_entity
