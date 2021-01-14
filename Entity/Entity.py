@@ -118,6 +118,3 @@ class Entity(Sprite):
             self.image = self.all_animations_file[self.now_animation][
                 self.tick_of_animation % len(self.all_animations_file[self.now_animation])]
             self.tick_of_animation += 1
-
-
-
