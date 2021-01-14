@@ -37,7 +37,7 @@ class BattleState(StateFather):
         self.choose_line = [Choose_line(4, images, i, fm, self.low_line) for i in range(4)]
         self.choose_line[0].set_selected(True)
 
-        self.player_elix = 10
+        self.player_elix = 10.0
 
         self.background_sprite = pg.sprite.Sprite(self.background_group)
         self.background_sprite.image = fm.get_function("IMGManager").load_image("back_default.png")
@@ -48,7 +48,7 @@ class BattleState(StateFather):
     def update(self, event):
         super().update(event)
         self.now_time += 1
-
+        self.player_elix += 0.01
         if self.end_status == -1:
             self.enemy_entity.update(event)
             self.player_entity.update(event)
