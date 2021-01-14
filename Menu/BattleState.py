@@ -14,7 +14,9 @@ class BattleState(StateFather):
         self.now_time = 0
 
         self.diff = int(fm.get_function("DiffManager").get_diff())
-        self.bot_kd = 360 // self.diff
+        self.bot_kd = 1280 // self.diff
+
+        self.all_types_of_entities = [Grib.Grib, Blue.Blue, Purple.Purple, Flying.Flying]
 
         self.void_entity = pg.sprite.Group()
 
@@ -67,10 +69,11 @@ class BattleState(StateFather):
         if self.now_time == self.bot_kd:
             # bot intelligent
             if self.diff <= 5:
-                for i in range(self.diff * 3):
-                    pass
-                    # ему похуй, расставляет по рандому
-
+                for i in range(int(self.diff * 1.3)):
+                    from random import choice, randint
+                    en_entity = choice(self.all_types_of_entities)
+                    x, y = randint(500, 600), randint(30, 200)
+                    en_entity(x, y, self.fm, self, self.fm.get_function("SimpleVars").ENEMY_TEAM_ID)
             else:
                 pass
                 # расставляет в зависимости от расстановки врагов противника
