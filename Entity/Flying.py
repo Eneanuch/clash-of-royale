@@ -5,10 +5,11 @@ from Entity.Entity import Entity
 class Flying(Entity):
     def __init__(self, x, y, fm, bs, team_id, *groups: AbstractGroup):
         super().__init__(x, y, fm, bs, team_id, *groups)
-        self.damage = 70
+        self.damage = 10
         self.max_hp = 200
-        self.time_space = 5
-        self.speed = 3
+        self.time_space = 20
+        self.speed = 5
+        self.price = 5
 
         self.image_name = 'flying.png'
         self.all_animations = ['walk', 'death', 'attack']

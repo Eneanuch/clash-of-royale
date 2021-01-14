@@ -29,8 +29,7 @@ class Entity(Sprite):
         self.now_time = 0
 
         # pricing
-        self.price = fm.get_function("SimpleFunctionsManager"). \
-            not_round_round(2, 0, fm.get_function("SimpleVars").MAX_ELIX)
+        self.price = 2.0
 
         # sprite init
         self.image_name = "entity.png"

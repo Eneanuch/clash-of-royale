@@ -7,8 +7,9 @@ class Blue(Entity):
         super().__init__(x, y, fm, bs, team_id, *groups)
         self.damage = 8
         self.max_hp = 60
-        self.time_space = 10
+        self.time_space = 15
         self.speed = 8
+        self.price = 2.0
 
         self.image_name = 'blue.png'
         self.all_animations = ['walk', 'death', 'attack']
