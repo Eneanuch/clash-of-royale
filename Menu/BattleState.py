@@ -69,6 +69,7 @@ class BattleState(StateFather):
             else:
                 win_text = self.translate.translate("player_lose")
             self.draw_text(self.pg, win_text, 120, 300)
+            # draw win or lose text
 
     def get_enemy_group(self):
         return self.enemy_entity
