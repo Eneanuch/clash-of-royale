@@ -48,7 +48,8 @@ class BattleState(StateFather):
     def update(self, event):
         super().update(event)
         self.now_time += 1
-        self.elixir.set_elixir(self.elixir.elixir + 0.01)
+        if self.elixir.elixir < 10:
+            self.elixir.set_elixir(self.elixir.elixir + 0.01)
         if self.end_status == -1:
             self.enemy_entity.update(event)
             self.player_entity.update(event)
