@@ -7,6 +7,9 @@ class MainMenu(StateFather):
 
         self.current_button = 0
 
+        self.show_top_10 = 0
+        self.top_10_list = list()
+
         self.background_group = pg.sprite.Group()
 
         self.background_sprite = pg.sprite.Sprite(self.background_group)
@@ -15,14 +18,16 @@ class MainMenu(StateFather):
         self.background_sprite.rect.x = 0
         self.background_sprite.rect.y = 0
 
-        self.buttons = ["play", "difficult",  "sound", "effects",  "lang"]
+        self.buttons = ["play", "difficult",  "sound", "effects",  "lang", "show_top10"]
         self.buttons_status = ["",
                                "self.fm.get_function('DiffManager').get_diff()",
                                "self.fm.get_function('SoundManager').get_volume()",
                                "self.fm.get_function('SoundManager').get_effect()",
                                "self.fm.get_function('TranslateManager').get_now_lang()",
+                               ""
                                 ]
-        self.actions = [self.play_action, self.diff_action, self.sound_action, self.effects_action, self.lang_action]
+        self.actions = [self.play_action, self.diff_action, self.sound_action,
+                        self.effects_action, self.lang_action, self.show_top_10_action]
 
         self.start_state()
 
@@ -39,6 +44,16 @@ class MainMenu(StateFather):
             if self.buttons_status[k]:
                 self.draw_text(self.pg, str(eval(self.buttons_status[k])), 350, 100 + k * 30)
             self.draw_text(self.pg, self.translate.translate(i), 150, 100 + k * 30, color=color)
+        if self.show_top_10:
+            self.draw_rect_alpha(self.pg.Color(0, 0, 0, 200), self.pg.Rect(450, 100, 300, 5 * 37), 8)
+            for k, i in enumerate(sorted(self.top_10_list)[::-1]):
+                self.draw_text(self.pg, str(k + 1) + "| " +
+                               self.fm.get_function("TranslateManager").translate("scores")
+                               + ": " + str(i[0]), 480, 100 + k * 37)
+
+    def show_top_10_action(self, event):
+        if event.key == self.pg.K_RETURN:
+            self.show_top_10 = not self.show_top_10
 
     def effects_action(self, event):
         if event.key == self.pg.K_RIGHT:
@@ -93,6 +108,10 @@ class MainMenu(StateFather):
 
     def start_state(self):
         super().start_state()
+
+        self.top_10_list = list(self.fm.get_function("DBManager").
+                                do_request("SELECT * FROM main"))[:5]
+
         self.fm.get_function('SoundManager').play_background_sound('background_menu.mp3')
 
     def stop_state(self):

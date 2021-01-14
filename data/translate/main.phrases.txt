@@ -10,6 +10,9 @@
     yes = Да
     no = Нет
     effects = Зв. эффекты
+    score = Очки
+    scores = Очков
+    show_top10 = Показать топ-10
 [EN]
     play = Play
     exit = Exit
@@ -22,3 +25,6 @@
     yes = Yes
     no = No
     effects = Snd. Effects
+    score = Score
+    scores = Score's
+    show_top10 = Show top 10

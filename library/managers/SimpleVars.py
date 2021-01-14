@@ -13,5 +13,7 @@ class SimpleVars:
 
     PLAYER_WIN_STATE = 0
 
+    SCORE_ADDING = 10
+
     def __init__(self, main_log, fm):
         main_log.write_log("Vars loaded", self)

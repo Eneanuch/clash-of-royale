@@ -13,6 +13,9 @@ class BattleState(StateFather):
 
         self.now_time = 0
 
+        self.score = 0
+        self.do_score = 0
+
         self.diff = int(fm.get_function("DiffManager").get_diff())
         self.bot_kd = 1280 // self.diff
 
@@ -66,18 +69,20 @@ class BattleState(StateFather):
                             # checking of able to spawn entity
                             Grib.Grib(*pos, self.fm, self, self.fm.get_function("SimpleVars").PLAYER_TEAM_ID,
                                       self.void_entity)
-                if event.type == self.pg.KEYDOWN:
-                    if event.key == self.pg.K_ESCAPE:
-                        # if user want to exit
-                        self.fm.get_function('StateManager').\
-                            remove_state(self.fm.get_function('SimpleVars').BATTLE_STATUS)
-                        self.fm.get_function('StateManager').\
-                            add_state(BattleState(self.screen, self.pg, self.fm))
-                        self.fm.get_function('StateManager').\
-                            set_state(self.fm.get_function('SimpleVars').MAIN_MENU_STATUS)
+        if event:
+            if event.type == self.pg.KEYDOWN:
+                if event.key == self.pg.K_ESCAPE:
+                    # if user want to exit
+                    self.fm.get_function('StateManager'). \
+                        remove_state(self.fm.get_function('SimpleVars').BATTLE_STATUS)
+                    self.fm.get_function('StateManager'). \
+                        add_state(BattleState(self.screen, self.pg, self.fm))
+                    self.fm.get_function('StateManager'). \
+                        set_state(self.fm.get_function('SimpleVars').MAIN_MENU_STATUS)
 
         if self.now_time == self.bot_kd:
             # bot intelligent
+            self.score += self.fm.get_function("SimpleVars").SCORE_ADDING * self.diff // 2
             for i in range(int(self.diff // 2)):
                 from random import choice, randint
                 en_entity = choice(self.all_types_of_entities)
@@ -87,14 +92,28 @@ class BattleState(StateFather):
             self.now_time = 0
         if not self.player_post.life_state:
             self.end_status = 1
+            if not self.do_score:
+                self.fm.get_function("DBManager"). \
+                    do_request(f"INSERT INTO main (score) VALUES({self.score})")
+                self.do_score = 1
         elif not self.enemy_post.life_state:
             self.end_status = 0
+            if not self.do_score:
+                self.fm.get_function("DBManager").\
+                    do_request(f"INSERT INTO main (score) VALUES({self.score})")
+                self.do_score = 1
 
     def draw(self):
         super().draw()
         self.background_group.draw(self.screen)
 
         self.draw_rect_alpha(self.pg.Color(0, 0, 0, 200), self.pg.Rect(200, 270, 410, 125), 8)
+
+        self.draw_text(
+            self.pg,
+            f"{self.fm.get_function('TranslateManager').translate('score')}:"
+            f" {self.score}",
+            10, 10, size=16)
 
         if self.end_status == -1:
             self.enemy_entity.draw(self.screen)
