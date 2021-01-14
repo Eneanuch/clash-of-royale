@@ -35,8 +35,8 @@ class Entity(Sprite):
         # sprite init
         self.image_name = "entity.png"
 
-        self.sprite_width = 50
-        self.sprite_height = 50
+        self.sprite_width = 70
+        self.sprite_height = 70
 
         self.all_animations = ["walk", "attack", "death"]
         self.all_animations_file = list()
@@ -102,7 +102,7 @@ class Entity(Sprite):
             .not_round_round(self.hp, 0, self.max_hp)
         if self.hp == 0:
             self.life_state = 0
-            if len(self.all_animations_file) > 1:
+            if len(self.all_animations_file) > 2:
                 self.now_animation = 2
             else:
                 self.kill()
@@ -110,34 +110,37 @@ class Entity(Sprite):
     def update(self, event):
         self.check_death()
         self.now_time += 1
-        self.image = self.all_animations_file[self.now_animation][
-            self.tick_of_animation % len(self.all_animations_file[self.now_animation])]
-        if self.time_space == self.now_time:
-            self.now_time = 0
+        try:
+            self.image = self.all_animations_file[self.now_animation][
+                self.tick_of_animation % len(self.all_animations_file[self.now_animation])]
+            if self.time_space == self.now_time:
+                self.now_time = 0
 
-            if self.now_animation == 0:
-                # for walk
-                collide_sprite = spritecollideany(self, self.battle_state.get_not_my_group(self.team_id))
-                # can to attack?
-                # print(collide_sprite.__class__.__name__)
-                if collide_sprite and self.damage:
-                    collide_sprite.give_damage(self.damage)
-                    if len(self.all_animations_file) > 1:
-                        self.now_animation = 1
-                        # change to attack
-                    self.tick_of_animation = 0
-            if self.now_animation == 0:
-                self.rect.x += self.speed \
-                    if self.fm.get_function("SimpleVars").PLAYER_TEAM_ID == self.team_id \
-                    else -self.speed
-            if self.now_animation == 1:
-                # print("attack")
-                if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
-                    self.now_animation = 0
-            if self.now_animation == 2:
-                # change to kill
-                if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
-                    self.kill()
+                if self.now_animation == 0:
+                    # for walk
+                    collide_sprite = spritecollideany(self, self.battle_state.get_not_my_group(self.team_id))
+                    # can to attack?
+                    # print(collide_sprite.__class__.__name__)
+                    if collide_sprite and self.damage:
+                        collide_sprite.give_damage(self.damage)
+                        if len(self.all_animations_file) > 1:
+                            self.now_animation = 1
+                            # change to attack
+                        self.tick_of_animation = 0
+                if self.now_animation == 0:
+                    self.rect.x += self.speed \
+                        if self.fm.get_function("SimpleVars").PLAYER_TEAM_ID == self.team_id \
+                        else -self.speed
+                if self.now_animation == 1:
+                    # print("attack")
+                    if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
+                        self.now_animation = 0
+                if self.now_animation == 2:
+                    # change to kill
+                    if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
+                        self.kill()
 
-            # changing sprite
-            self.tick_of_animation += 1
+                # changing sprite
+                self.tick_of_animation += 1
+        except Exception as e:
+            self.fm.get_main_log().write_log(f" {e} || {self.now_animation} ", self, self.fm.get_main_log().ERROR_STATE)

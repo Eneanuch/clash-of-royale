@@ -1,5 +1,4 @@
 from pygame.sprite import AbstractGroup
-from random import randint
 from Entity.Entity import Entity
 
 
@@ -19,3 +18,21 @@ class Post(Entity):
         self.all_animations = ["idle"]
         self.all_animations_sprites = [1]
         self.sprite_init()
+
+        # rect for health
+        self.full_hp_rect = self.battle_state.pg.Rect(0, 0, self.max_hp * 10, 7)
+        self.hp_rect = self.battle_state.pg.Rect(0, 0, self.hp * 10, 7)
+
+    def update(self, event):
+        super().update(event)
+
+        self.full_hp_rect = self.battle_state.pg.Rect(self.rect.x - 10,
+                                                      self.rect.y + self.sprite_height + 10, self.max_hp * 10, 7)
+        self.hp_rect = self.battle_state.pg.Rect(self.rect.x - 10,
+                                                 self.rect.y + self.sprite_height + 10, self.hp * 10, 7)
+
+        self.draw_health()
+
+    def draw_health(self):
+        self.battle_state.draw_rect_alpha(self.battle_state.pg.Color(0, 0, 0, 128), self.full_hp_rect)
+        self.battle_state.draw_rect_alpha(self.battle_state.pg.Color(255, 0, 0), self.hp_rect)

@@ -31,7 +31,7 @@ class StateFather:
         text_surface = my_font.render(text, False, color)
         self.screen.blit(text_surface, (x, y))
 
-    def draw_rect_alpha(self, color, rect, radius):
+    def draw_rect_alpha(self, color, rect, radius=0):
         shape_surf = self.pg.Surface(self.pg.Rect(rect).size, self.pg.SRCALPHA)
         self.pg.draw.rect(shape_surf, color, shape_surf.get_rect(), border_radius=radius)
         self.screen.blit(shape_surf, rect)

@@ -63,13 +63,23 @@ class BattleState(StateFather):
                     pos = self.pg.mouse.get_pos()
                     if event.button == 1:
                         if 150 <= pos[0] <= 400 and 30 <= pos[1] <= 200:
+                            # checking of able to spawn entity
                             Grib.Grib(*pos, self.fm, self, self.fm.get_function("SimpleVars").PLAYER_TEAM_ID,
                                       self.void_entity)
+                if event.type == self.pg.KEYDOWN:
+                    if event.key == self.pg.K_ESCAPE:
+                        # if user want to exit
+                        self.fm.get_function('StateManager').\
+                            remove_state(self.fm.get_function('SimpleVars').BATTLE_STATUS)
+                        self.fm.get_function('StateManager').\
+                            add_state(BattleState(self.screen, self.pg, self.fm))
+                        self.fm.get_function('StateManager').\
+                            set_state(self.fm.get_function('SimpleVars').MAIN_MENU_STATUS)
 
         if self.now_time == self.bot_kd:
             # bot intelligent
             if self.diff <= 5:
-                for i in range(int(self.diff * 1.3)):
+                for i in range(int(self.diff // 2)):
                     from random import choice, randint
                     en_entity = choice(self.all_types_of_entities)
                     x, y = randint(500, 600), randint(30, 200)

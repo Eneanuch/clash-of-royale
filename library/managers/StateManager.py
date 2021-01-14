@@ -10,6 +10,10 @@ class StateManager:
         self.status.append(state)
         self.fm.get_main_log().write_log(f"state added '{state}'", self)
 
+    def remove_state(self, state):
+        self.status.pop(state)
+        self.fm.get_main_log().write_log(f"state removed with num'{state}'", self)
+
     def set_state(self, num_state):
         self.status[self.current_state].stop_state()
         self.current_state = num_state
