@@ -13,7 +13,7 @@ class BattleState(StateFather):
         self.player_entity = pg.sprite.Group()
         self.low_line = pg.sprite.Group()
 
-        self.player_post = Post(0, 70, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.player_entity)
+        self.player_post = Post(10, 70, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.player_entity)
         self.enemy_post = Post(650, 70, fm, self, 1, self.player_entity)
         self.elixir = Elixir(self.player_entity)
         images = [f'{i + 1}pre.png' for i in range(4)]
