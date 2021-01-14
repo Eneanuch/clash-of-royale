@@ -16,7 +16,7 @@ log_it = False
 
 WIDTH, HEIGHT = 800, 400
 NAME = "Clash of Royale"
-VERSION = "4.8"
+VERSION = "6.6"
 BUILD = "6"
 STATUS = "alpha"
 
