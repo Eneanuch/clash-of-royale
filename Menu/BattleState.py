@@ -26,16 +26,15 @@ class BattleState(StateFather):
         self.player_post = Post.Post(10, 70, fm, self, fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.void_entity)
         self.enemy_post = Post.Post(650, 70, fm, self, fm.get_function("SimpleVars").ENEMY_TEAM_ID, self.void_entity)
 
-        self.elixir = Elixir(self.player_entity)
+        self.elixir = Elixir(self.fm, self.pg, self.screen, self.player_entity)
         images = [f'{i + 1}pre.png' for i in range(4)]
         self.choose_line = [Choose_line(4, images, i, fm, self.low_line) for i in range(4)]
         self.choose_line[0].set_selected(True)
 
         self.player_elix = 50
-        self.bot_elix = 50
 
         self.background_sprite = pg.sprite.Sprite(self.background_group)
-        self.background_sprite.image = fm.get_function("IMGManager").load_image("background.png")
+        self.background_sprite.image = fm.get_function("IMGManager").load_image("back_default.png")
         self.background_sprite.rect = self.background_sprite.image.get_rect()
         self.background_sprite.rect.x = 0
         self.background_sprite.rect.y = 0
@@ -84,6 +83,9 @@ class BattleState(StateFather):
     def draw(self):
         super().draw()
         self.background_group.draw(self.screen)
+
+        self.draw_rect_alpha(self.pg.Color(0, 0, 0, 200), self.pg.Rect(200, 270, 410, 125), 8)
+
         if self.end_status == -1:
             self.enemy_entity.draw(self.screen)
             self.player_entity.draw(self.screen)

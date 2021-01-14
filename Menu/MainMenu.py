@@ -10,7 +10,7 @@ class MainMenu(StateFather):
         self.background_group = pg.sprite.Group()
 
         self.background_sprite = pg.sprite.Sprite(self.background_group)
-        self.background_sprite.image = fm.get_function("IMGManager").load_image("menu.png")
+        self.background_sprite.image = fm.get_function("IMGManager").load_image("back_default.png")
         self.background_sprite.rect = self.background_sprite.image.get_rect()
         self.background_sprite.rect.x = 0
         self.background_sprite.rect.y = 0
@@ -25,6 +25,9 @@ class MainMenu(StateFather):
 
     def draw(self):
         self.background_group.draw(self.screen)
+
+        self.draw_rect_alpha(self.pg.Color(0, 0, 0, 200), self.pg.Rect(120, 100, 300, len(self.buttons) * 35), 8)
+
         for k, i in enumerate(self.buttons):
             if self.current_button == k:
                 color = (255, 0, 0)
@@ -42,28 +45,28 @@ class MainMenu(StateFather):
         if event.key == self.pg.K_RIGHT:
             self.fm.get_function('DiffManager').add_diff(1)
             self.fm.get_function('SoundManager').set_volume(self.fm.get_function('SoundManager').now_volume)
-            self.fm.get_function('SoundManager').play_sound('replace.wav')
+            self.fm.get_function('SoundManager').play_sound('replace.mp3')
         elif event.key == self.pg.K_LEFT:
             self.fm.get_function('DiffManager').add_diff(-1)
             self.fm.get_function('SoundManager').set_volume(self.fm.get_function('SoundManager').now_volume)
-            self.fm.get_function('SoundManager').play_sound('replace.wav')
+            self.fm.get_function('SoundManager').play_sound('replace.mp3')
 
     def sound_action(self, event):
         if event.key == self.pg.K_RIGHT:
             self.fm.get_function('SoundManager').add_volume(0.1)
             self.fm.get_function('SoundManager').set_volume(self.fm.get_function('SoundManager').now_volume)
-            self.fm.get_function('SoundManager').play_sound('replace.wav')
+            self.fm.get_function('SoundManager').play_sound('replace.mp3')
         elif event.key == self.pg.K_LEFT:
             self.fm.get_function('SoundManager').remove_volume(0.1)
-            self.fm.get_function('SoundManager').play_sound('replace.wav')
+            self.fm.get_function('SoundManager').play_sound('replace.mp3')
 
     def lang_action(self, event):
         if event.key == self.pg.K_RIGHT:
             self.fm.get_function('TranslateManager').revert_language()
-            self.fm.get_function('SoundManager').play_sound('replace.wav')
+            self.fm.get_function('SoundManager').play_sound('replace.mp3')
         elif event.key == self.pg.K_LEFT:
             self.fm.get_function('TranslateManager').revert_language()
-            self.fm.get_function('SoundManager').play_sound('replace.wav')
+            self.fm.get_function('SoundManager').play_sound('replace.mp3')
 
     def exit_action(self, event):
         if event.key == self.pg.K_RETURN:
@@ -74,10 +77,10 @@ class MainMenu(StateFather):
             if event.type == self.pg.KEYUP:
                 if event.key == self.pg.K_UP:
                     self.current_button -= 1
-                    self.fm.get_function('SoundManager').play_sound('menu.wav')
+                    self.fm.get_function('SoundManager').play_sound('menu.mp3')
                 elif event.key == self.pg.K_DOWN:
                     self.current_button += 1
-                    self.fm.get_function('SoundManager').play_sound('menu.wav')
+                    self.fm.get_function('SoundManager').play_sound('menu.mp3')
                 else:
                     self.actions[self.current_button](event)
                 self.current_button = self.fm.get_function("SimpleFunctionsManager"). \
