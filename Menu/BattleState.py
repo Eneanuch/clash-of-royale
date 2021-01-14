@@ -7,6 +7,7 @@ from Low_line.Choose_line import Choose_line
 class BattleState(StateFather):
     def __init__(self, screen, pg, fm):
         super().__init__(screen, pg, fm)
+        from random import randint
         self.fm = fm
 
         self.end_status = -1
@@ -17,7 +18,7 @@ class BattleState(StateFather):
         self.do_score = 0
 
         self.diff = int(fm.get_function("DiffManager").get_diff())
-        self.bot_kd = 1280 // self.diff
+        self.bot_kd = randint(150, 500)
 
         self.all_types_of_entities = [Grib.Grib, Blue.Blue, Purple.Purple, Flying.Flying]
 
@@ -36,8 +37,7 @@ class BattleState(StateFather):
         self.choose_line = [Choose_line(4, images, i, fm, self.low_line) for i in range(4)]
         self.choose_line[0].set_selected(True)
 
-        self.player_elix = 50
-        self.bot_elix = 50
+        self.player_elix = 10
 
         self.background_sprite = pg.sprite.Sprite(self.background_group)
         self.background_sprite.image = fm.get_function("IMGManager").load_image("back_default.png")
@@ -82,14 +82,15 @@ class BattleState(StateFather):
                     self.fm.get_function('StateManager'). \
                         set_state(self.fm.get_function('SimpleVars').MAIN_MENU_STATUS)
         if self.now_time == self.bot_kd:
+            from random import choice, randint
             # bot intelligent
             self.score += self.fm.get_function("SimpleVars").SCORE_ADDING * self.diff // 2
-            for i in range(int(self.diff // 2)):
-                from random import choice, randint
+            for i in range(int(self.diff // 3)):
                 en_entity = choice(self.all_types_of_entities)
                 x, y = randint(500, 600), randint(30, 200)
                 en_entity(x, y, self.fm, self, self.fm.get_function("SimpleVars").ENEMY_TEAM_ID)
                 # расставляет в зависимости от расстановки врагов противника
+            self.bot_kd = randint(150, 500)
             self.now_time = 0
         if not self.player_post.life_state:
             self.end_status = 1

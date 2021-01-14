@@ -13,7 +13,7 @@ class DiffManager:
         return self.diff
 
     def add_diff(self, diff):
-        self.diff = self.fm.get_function("SimpleFunctionsManager").not_round_round(self.diff+diff, 2, 10)
+        self.diff = self.fm.get_function("SimpleFunctionsManager").not_round_round(self.diff+diff, 3, 10)
 
     def save_diff(self):
         self.fm.get_function('CFGManager').write_var_to_cfg("difficult", str(self.diff))
