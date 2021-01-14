@@ -65,11 +65,15 @@ class BattleState(StateFather):
             for i in range(self.diff * 3):
                 pass
             self.now_time = 0
+        if not self.player_post.life_state:
+            self.end_status = 1
+        elif not self.enemy_post.life_state:
+            self.end_status = 0
 
     def draw(self):
         super().draw()
+        self.background_group.draw(self.screen)
         if self.end_status == -1:
-            self.background_group.draw(self.screen)
             self.enemy_entity.draw(self.screen)
             self.player_entity.draw(self.screen)
             self.low_line.draw(self.screen)
@@ -78,7 +82,7 @@ class BattleState(StateFather):
                 win_text = self.translate.translate("player_win")
             else:
                 win_text = self.translate.translate("player_lose")
-            self.draw_text(self.pg, win_text, 120, 300)
+            self.draw_text(self.pg, win_text, 270, 300)
             # draw win or lose text
 
     def get_enemy_group(self):
