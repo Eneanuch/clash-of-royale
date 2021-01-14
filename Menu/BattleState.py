@@ -32,7 +32,7 @@ class BattleState(StateFather):
         self.enemy_post = Post.Post(650, 70, fm, self, fm.get_function("SimpleVars").ENEMY_TEAM_ID, self.void_entity)
 
         self.elixir = Elixir(self.fm, self.pg, self.screen, self.player_entity)
-        images = [f'{i + 1}pre.png' for i in range(4)]
+        images = ['gribpre.png', 'purplepre.png', 'bluepre.png', 'flyingpre.png']
         self.choose_line = [Choose_line(4, images, i, fm, self.low_line) for i in range(4)]
         self.choose_line[0].set_selected(True)
 
