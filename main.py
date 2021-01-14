@@ -62,6 +62,8 @@ if __name__ == '__main__':
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                fm.get_function("CFGManager").write_var_to_cfg("sound", fm.get_function("SoundManager").get_volume())
+                fm.get_function("CFGManager").write_var_to_cfg("lang", fm.get_function("TranslateManager").get_curr())
                 running = False
             sm.get_state(sm.get_current_state()).update(event)
         sm.get_state(sm.get_current_state()).draw()

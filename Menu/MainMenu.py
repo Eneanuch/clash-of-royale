@@ -32,18 +32,18 @@ class MainMenu(StateFather):
         if event.key == self.pg.K_RIGHT:
             self.fm.get_function('SoundManager').add_volume(0.1)
             self.fm.get_function('SoundManager').set_volume(self.fm.get_function('SoundManager').now_volume)
-            self.fm.get_function('SoundManager').play_sound('replace.mp3')
+            self.fm.get_function('SoundManager').play_sound('replace.wav')
         elif event.key == self.pg.K_LEFT:
             self.fm.get_function('SoundManager').remove_volume(0.1)
-            self.fm.get_function('SoundManager').play_sound('replace.mp3')
+            self.fm.get_function('SoundManager').play_sound('replace.wav')
 
     def lang_action(self, event):
         if event.key == self.pg.K_RIGHT:
             self.fm.get_function('TranslateManager').revert_language()
-            self.fm.get_function('SoundManager').play_sound('replace.mp3')
+            self.fm.get_function('SoundManager').play_sound('replace.wav')
         elif event.key == self.pg.K_LEFT:
             self.fm.get_function('TranslateManager').revert_language()
-            self.fm.get_function('SoundManager').play_sound('replace.mp3')
+            self.fm.get_function('SoundManager').play_sound('replace.wav')
 
     def exit_action(self, event):
         if event.key == self.pg.K_RETURN:
@@ -53,10 +53,10 @@ class MainMenu(StateFather):
         if event.type == self.pg.KEYUP:
             if event.key == self.pg.K_UP:
                 self.current_button -= 1
-                self.fm.get_function('SoundManager').play_sound('menu.mp3')
+                self.fm.get_function('SoundManager').play_sound('menu.wav')
             elif event.key == self.pg.K_DOWN:
                 self.current_button += 1
-                self.fm.get_function('SoundManager').play_sound('menu.mp3')
+                self.fm.get_function('SoundManager').play_sound('menu.wav')
             else:
                 self.actions[self.current_button](event)
             self.current_button = self.fm.get_function("SimpleFunctionsManager"). \

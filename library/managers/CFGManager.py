@@ -1,5 +1,5 @@
 class CFGManager:
-    PATH_TO_CFG = ""
+    PATH_TO_CFG = "./data/config/"
     GENERAL_SECTION = "GENERAL"
 
     def __init__(self, main_log, fm):
@@ -13,8 +13,10 @@ class CFGManager:
     def load_config(self):
         try:
             self.cfg_main.read(self.PATH_TO_CFG + 'main.cfg', encoding='utf-8')  # load config file
+            # print(self.cfg_main[self.GENERAL_SECTION])
             self.main_log.write_log("Config has been loaded", self)
         except Exception as e:
+            # print(e)
             self.main_log.write_log("Can't read config", self, self.main_log.CANT_LOAD_STATE)
             self.main_log.write_log("Error " + str(e), self, self.main_log.ERROR_STATE)
 

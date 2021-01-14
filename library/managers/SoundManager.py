@@ -12,12 +12,17 @@ class SoundManager:
 
         self.load_all_sounds()
 
+        self.load_sound_from_cfg()
+
     def load_sound_from_cfg(self):
-        pass
+        if self.pygame:
+            self.now_volume = float(self.fm.get_function("CFGManager").read_var_from_cfg("sound", "0.1"))
+            self.pygame.mixer.music.set_volume(float(self.now_volume))
 
     def set_pygame(self, pygame):
         self.pygame = pygame
         self.main_log.write_log(f"Yes! I get the pygame", self)
+        self.load_sound_from_cfg()
         self.load_all_sounds()
         # getting the pygame object
 
@@ -31,14 +36,18 @@ class SoundManager:
         if not self.pygame:
             self.main_log.write_log(f"No pygame", self, self.main_log.ERROR_STATE)
             return
+        self.pygame.mixer.music.set_volume(self.now_volume)
         sound_object = self.pygame.mixer.Sound(self.PATH_TO_SOUNDS + name)
         self.main_log.write_log(f"Sound has been loaded '{name}'", self)
         self.sounds[name] = sound_object
 
     def set_volume(self, volume):
-        volume = self.fm.get_function('SimpleFunctionsManager').not_round_round(volume, 0, 2)
+        volume = self.fm.get_function('SimpleFunctionsManager').not_round_round(volume, 0, 1)
         self.now_volume = volume
+        # print(self.pygame.mixer.music.get_volume())
+        self.pygame.mixer.music.pause()
         self.pygame.mixer.music.set_volume(volume)
+        self.pygame.mixer.music.unpause()
 
     def add_volume(self, volume):
         self.now_volume += volume

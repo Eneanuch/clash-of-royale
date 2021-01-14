@@ -9,6 +9,10 @@ class TranslateManager:
         self.language = {1: "RU", 2: "EN"}
         self.current_lang = 1
         self.load_translate()
+        self.load_from_cfg()
+
+    def load_from_cfg(self):
+        self.current_lang = int(self.fm.get_function('CFGManager').read_var_from_cfg("lang", 0))
 
     def set_current_language(self, lang):
         self.current_lang = lang
@@ -35,6 +39,9 @@ class TranslateManager:
 
     def get_languages(self):
         return self.language
+
+    def get_curr(self):
+        return str(self.current_lang)
 
     def revert_language(self):
         self.current_lang = self.fm.get_function('SimpleFunctionsManager').round_round(self.current_lang + 1, 1, 2)

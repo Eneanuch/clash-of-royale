@@ -2,6 +2,7 @@ from pygame.sprite import AbstractGroup, Sprite
 from pygame.sprite import spritecollideany
 from pygame import Rect
 
+
 class Entity(Sprite):
 
     def __init__(self, x, y, fm, bs, team_id,
