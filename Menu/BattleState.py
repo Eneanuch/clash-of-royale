@@ -71,7 +71,16 @@ class BattleState(StateFather):
                             index = max([i.is_selected() for i in self.choose_line])
                             now[index](pos[0] - 35, pos[1] - 35, self.fm, self,
                                        self.fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.void_entity)
-
+        if event:
+            if event.type == self.pg.KEYDOWN:
+                if event.key == self.pg.K_ESCAPE:
+                    # if user want to exit
+                    self.fm.get_function('StateManager'). \
+                        remove_state(self.fm.get_function('SimpleVars').BATTLE_STATUS)
+                    self.fm.get_function('StateManager'). \
+                        add_state(BattleState(self.screen, self.pg, self.fm))
+                    self.fm.get_function('StateManager'). \
+                        set_state(self.fm.get_function('SimpleVars').MAIN_MENU_STATUS)
         if self.now_time == self.bot_kd:
             # bot intelligent
             self.score += self.fm.get_function("SimpleVars").SCORE_ADDING * self.diff // 2
