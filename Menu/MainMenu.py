@@ -97,4 +97,4 @@ class MainMenu(StateFather):
 
     def stop_state(self):
         super().stop_state()
-        self.fm.get_function('SoundManager').play_background_sound()
+        self.fm.get_function('SoundManager').play_background_sound('background_menu.mp3')

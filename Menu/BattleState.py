@@ -124,3 +124,11 @@ class BattleState(StateFather):
             return self.get_player_group()
         else:
             return -1
+
+    def start_state(self):
+        super().start_state()
+        self.fm.get_function('SoundManager').play_background_sound('background_battle.mp3')
+
+    def stop_state(self):
+        super().stop_state()
+        self.fm.get_function('SoundManager').play_background_sound('background_battle.mp3')
