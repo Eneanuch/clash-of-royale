@@ -6,6 +6,7 @@
     enemy = Враг
     player_win = Вы победил!!
     player_lose = Вы проиграли!!
+    difficult = Сложность
 [EN]
     play = Play
     exit = Exit
@@ -14,3 +15,4 @@
     enemy = Enemy
     player_win = You are winner!!
     player_lose = You are losser!!
+    difficult = Difficulty

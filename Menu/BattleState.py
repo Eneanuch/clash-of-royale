@@ -11,6 +11,11 @@ class BattleState(StateFather):
 
         self.end_status = -1
 
+        self.now_time = 0
+
+        self.diff = int(fm.get_function("DiffManager").get_diff())
+        self.bot_kd = 360 // self.diff
+
         self.enemy_entity = pg.sprite.Group()
         self.player_entity = pg.sprite.Group()
         self.low_line = pg.sprite.Group()
@@ -23,8 +28,6 @@ class BattleState(StateFather):
         self.choose_line = [Choose_line(4, images, i, fm, self.low_line) for i in range(4)]
         self.choose_line[0].set_selected(True)
 
-        self.now_wave = 1
-
         self.player_elix = 50
         self.bot_elix = 50
 
@@ -36,6 +39,8 @@ class BattleState(StateFather):
 
     def update(self, event):
         super().update(event)
+        self.now_time += 1
+
         if self.end_status == -1:
             self.enemy_entity.update(event)
             self.player_entity.update(event)
@@ -55,6 +60,11 @@ class BattleState(StateFather):
                     if pos[0] <= 400:
                         pass
                         # spawn entity
+
+        if self.now_time == self.bot_kd:
+            for i in range(self.diff * 3):
+                pass
+            self.now_time = 0
 
     def draw(self):
         super().draw()

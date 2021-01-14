@@ -15,12 +15,13 @@ class MainMenu(StateFather):
         self.background_sprite.rect.x = 0
         self.background_sprite.rect.y = 0
 
-        self.buttons = ["play", "sound", "lang", "exit"]
+        self.buttons = ["play", "difficult",  "sound", "lang", "exit"]
         self.buttons_status = ["",
+                               "self.fm.get_function('DiffManager').get_diff()",
                                "self.fm.get_function('SoundManager').get_volume()",
                                "self.fm.get_function('TranslateManager').get_now_lang()",
                                ""]
-        self.actions = [self.play_action, self.sound_action, self.lang_action, self.exit_action]
+        self.actions = [self.play_action, self.diff_action, self.sound_action, self.lang_action, self.exit_action]
 
     def draw(self):
         self.background_group.draw(self.screen)
@@ -36,6 +37,16 @@ class MainMenu(StateFather):
     def play_action(self, event):
         if event.key == self.pg.K_RETURN:
             self.fm.get_function('StateManager').set_state(self.fm.get_function('SimpleVars').BATTLE_STATUS)
+
+    def diff_action(self, event):
+        if event.key == self.pg.K_RIGHT:
+            self.fm.get_function('DiffManager').add_diff(1)
+            self.fm.get_function('SoundManager').set_volume(self.fm.get_function('SoundManager').now_volume)
+            self.fm.get_function('SoundManager').play_sound('replace.wav')
+        elif event.key == self.pg.K_LEFT:
+            self.fm.get_function('DiffManager').add_diff(-1)
+            self.fm.get_function('SoundManager').set_volume(self.fm.get_function('SoundManager').now_volume)
+            self.fm.get_function('SoundManager').play_sound('replace.wav')
 
     def sound_action(self, event):
         if event.key == self.pg.K_RIGHT:

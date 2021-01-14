@@ -1,7 +1,7 @@
 from library.Logging import MainLog
 from library.managers import CFGManager, DBManager, FunctionManager, \
     IMGManager, TranslateManager, SoundManager, SimpleVars, StateManager, \
-    SimpleFunctionsManager
+    SimpleFunctionsManager, DiffManager
 from os import environ
 from Menu.MainMenu import MainMenu
 from Menu.BattleState import BattleState
@@ -16,9 +16,9 @@ log_it = False
 
 WIDTH, HEIGHT = 800, 400
 NAME = "Clash of Royale"
-VERSION = "3.8"
+VERSION = "4.8"
 BUILD = "6"
-STATUS = "betta"
+STATUS = "alpha"
 
 if __name__ == '__main__':
     # debug setting
@@ -33,7 +33,8 @@ if __name__ == '__main__':
                                          IMGManager.IMGManager, TranslateManager.TranslateManager,
                                          SoundManager.SoundManager, SimpleVars.SimpleVars,
                                          StateManager.StateManager,
-                                         SimpleFunctionsManager.SimpleFunctionsManager)
+                                         SimpleFunctionsManager.SimpleFunctionsManager,
+                                         DiffManager.DiffManager)
 
     # initialization pygame
     pygame.init()
@@ -64,6 +65,7 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 fm.get_function("CFGManager").write_var_to_cfg("sound", fm.get_function("SoundManager").get_volume())
                 fm.get_function("CFGManager").write_var_to_cfg("lang", fm.get_function("TranslateManager").get_curr())
+                fm.get_function("DiffManager").save_diff()
                 running = False
             sm.get_state(sm.get_current_state()).update(event)
         sm.get_state(sm.get_current_state()).draw()
