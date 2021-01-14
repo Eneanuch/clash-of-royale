@@ -9,7 +9,7 @@ class Purple(Entity):
         self.max_hp = 150
         self.time_space = 20
         self.speed = 10
-        self.price = 4
+        self.price = 4.0
 
         self.image_name = 'purple.png'
         self.all_animations = ['walk', 'attack', 'death']

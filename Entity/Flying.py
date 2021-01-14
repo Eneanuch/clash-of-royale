@@ -9,7 +9,7 @@ class Flying(Entity):
         self.max_hp = 200
         self.time_space = 20
         self.speed = 5
-        self.price = 5
+        self.price = 5.0
 
         self.image_name = 'flying.png'
         self.all_animations = ['walk', 'death', 'attack']

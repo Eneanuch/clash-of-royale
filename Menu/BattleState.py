@@ -48,7 +48,7 @@ class BattleState(StateFather):
     def update(self, event):
         super().update(event)
         self.now_time += 1
-        self.player_elix += 0.01
+        self.elixir.set_elixir(self.elixir.elixir + 0.01)
         if self.end_status == -1:
             self.enemy_entity.update(event)
             self.player_entity.update(event)
@@ -69,8 +69,12 @@ class BattleState(StateFather):
                         if 150 <= pos[0] <= 400 and pos[1] <= 300:
                             now = [Grib.Grib, Purple.Purple, Blue.Blue, Flying.Flying]
                             index = max([i.is_selected() for i in self.choose_line])
-                            now[index](pos[0] - 35, pos[1] - 35, self.fm, self,
-                                       self.fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.void_entity)
+                            price = [4.0, 4.0, 2.0, 5.0]
+                            if self.elixir.elixir >= price[index]:
+                                go = now[index](pos[0] - 35, pos[1] - 35, self.fm, self,
+                                                self.fm.get_function("SimpleVars").PLAYER_TEAM_ID, self.void_entity)
+                                self.elixir.set_elixir(self.elixir.elixir - go.price)
+
         if event:
             if event.type == self.pg.KEYDOWN:
                 if event.key == self.pg.K_ESCAPE:
@@ -81,6 +85,7 @@ class BattleState(StateFather):
                         add_state(BattleState(self.screen, self.pg, self.fm))
                     self.fm.get_function('StateManager'). \
                         set_state(self.fm.get_function('SimpleVars').MAIN_MENU_STATUS)
+
         if self.now_time == self.bot_kd:
             from random import choice, randint
             # bot intelligent
