@@ -1,6 +1,7 @@
 from pygame.sprite import AbstractGroup, Sprite
 from pygame.sprite import spritecollideany
 from pygame import Rect
+from pygame.transform import flip
 
 
 class Entity(Sprite):
@@ -28,7 +29,7 @@ class Entity(Sprite):
         self.now_time = 0
 
         # pricing
-        self.price = fm.get_function("SimpleFunctionsManager").\
+        self.price = fm.get_function("SimpleFunctionsManager"). \
             not_round_round(2, 0, fm.get_function("SimpleVars").MAX_ELIX)
 
         # sprite init
@@ -64,6 +65,12 @@ class Entity(Sprite):
                 some_anim.append(self.image.subsurface(
                     Rect(frame_location, self.rect.size)))
             self.all_animations_file.append(some_anim)
+        for k, i in enumerate(self.all_animations_file):
+            for k1, j in enumerate(i):
+                self.all_animations_file[k][k1] = flip(
+                    self.all_animations_file[k][k1],
+                    self.fm.get_function("SimpleVars").PLAYER_TEAM_ID == self.team_id,
+                    False)
 
     def set_health(self, hp):
         self.hp = hp
@@ -83,7 +90,7 @@ class Entity(Sprite):
         entity.give_damage(self.damage)
 
     def check_death(self):
-        self.hp = self.fm.get_function('SimpleFunctionsManager')\
+        self.hp = self.fm.get_function('SimpleFunctionsManager') \
             .not_round_round(self.hp, 0, self.max_hp)
         if self.hp == 0:
             self.life_state = 0
@@ -118,6 +125,5 @@ class Entity(Sprite):
             self.image = self.all_animations_file[self.now_animation][
                 self.tick_of_animation % len(self.all_animations_file[self.now_animation])]
             self.tick_of_animation += 1
-
-
-
+            if self.now_animation == 0:
+                self.rect.x += self.speed

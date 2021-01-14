@@ -46,6 +46,12 @@ class BattleState(StateFather):
                 index = (index - 1) % 4
                 self.fm.get_function('SoundManager').play_sound('menu.mp3')
             self.choose_line[index].set_selected(True)
+        if event.type == self.pg.MOUSEBUTTONDOWN:
+            pos = self.pg.mouse.get_pos()
+            if event.button == 1:
+                if pos[0] <= 400:
+                    pass
+                    # spawn entity
 
     def draw(self):
         super().draw()
@@ -53,7 +59,6 @@ class BattleState(StateFather):
         self.enemy_entity.draw(self.screen)
         self.player_entity.draw(self.screen)
         self.low_line.draw(self.screen)
-
 
     def get_enemy_group(self):
         return self.enemy_entity
