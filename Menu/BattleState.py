@@ -71,10 +71,11 @@ class BattleState(StateFather):
                 for i in range(self.diff * 3):
                     pass
                     # ему похуй, расставляет по рандому
-                self.now_time = 0
+
             else:
                 pass
                 # расставляет в зависимости от расстановки врагов противника
+            self.now_time = 0
         if not self.player_post.life_state:
             self.end_status = 1
         elif not self.enemy_post.life_state:
