@@ -55,13 +55,13 @@ class Entity(Sprite):
         self.rect.y = self.y
 
     def cut_sheet(self, columns, rows):
-        self.rect = Rect(0, 0, self.image.get_width() // columns,
-                         self.image.get_height() // rows)
+        self.rect = Rect(0, 0, self.sprite_width,
+                         self.sprite_height)
 
         for j in range(rows):
             some_anim = list()
             for i in range(columns):
-                frame_location = (self.rect.w * i, self.rect.h * i)
+                frame_location = (self.rect.w * i, self.rect.h * j)
                 some_anim.append(self.image.subsurface(
                     Rect(frame_location, self.rect.size)))
             self.all_animations_file.append(some_anim)
@@ -102,6 +102,8 @@ class Entity(Sprite):
     def update(self, event):
         self.check_death()
         self.now_time += 1
+        self.image = self.all_animations_file[self.now_animation][
+            self.tick_of_animation % len(self.all_animations_file[self.now_animation])]
         if self.time_space == self.now_time:
             self.now_time = 0
             if self.now_animation == 0:
@@ -113,19 +115,20 @@ class Entity(Sprite):
                     collide_sprite.give_damage(self.damage)
                     if len(self.all_animations_file) > 1:
                         self.now_animation = 1
+                        # change to attack
                     self.tick_of_animation = 0
             if self.now_animation == 1:
+                # print("attack")
                 if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
                     self.now_animation = 0
             if self.now_animation == 2:
+                # change to kill
                 if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
                     self.kill()
 
             # changing sprite
-            self.image = self.all_animations_file[self.now_animation][
-                self.tick_of_animation % len(self.all_animations_file[self.now_animation])]
             self.tick_of_animation += 1
             if self.now_animation == 0:
                 self.rect.x += self.speed \
-                    if self.fm.get_function("SimpleVars").PLAYER_TEAM_ID == self.team_id\
+                    if self.fm.get_function("SimpleVars").PLAYER_TEAM_ID == self.team_id \
                     else -self.speed

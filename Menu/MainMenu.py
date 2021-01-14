@@ -70,14 +70,15 @@ class MainMenu(StateFather):
             exit()
 
     def update(self, event):
-        if event.type == self.pg.KEYUP:
-            if event.key == self.pg.K_UP:
-                self.current_button -= 1
-                self.fm.get_function('SoundManager').play_sound('menu.wav')
-            elif event.key == self.pg.K_DOWN:
-                self.current_button += 1
-                self.fm.get_function('SoundManager').play_sound('menu.wav')
-            else:
-                self.actions[self.current_button](event)
-            self.current_button = self.fm.get_function("SimpleFunctionsManager"). \
-                round_round(self.current_button, 0, len(self.buttons) - 1)
+        if event:
+            if event.type == self.pg.KEYUP:
+                if event.key == self.pg.K_UP:
+                    self.current_button -= 1
+                    self.fm.get_function('SoundManager').play_sound('menu.wav')
+                elif event.key == self.pg.K_DOWN:
+                    self.current_button += 1
+                    self.fm.get_function('SoundManager').play_sound('menu.wav')
+                else:
+                    self.actions[self.current_button](event)
+                self.current_button = self.fm.get_function("SimpleFunctionsManager"). \
+                    round_round(self.current_button, 0, len(self.buttons) - 1)

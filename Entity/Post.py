@@ -16,6 +16,3 @@ class Post(Entity):
         self.all_animations = ["idle"]
         self.all_animations_sprites = [1]
         self.sprite_init()
-
-    def check_death(self):
-        super().check_death()

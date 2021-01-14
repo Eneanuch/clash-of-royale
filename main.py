@@ -9,7 +9,7 @@ from Menu.BattleState import BattleState
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
-DEBUG = True
+DEBUG = False
 
 print_logs = False
 log_it = False
@@ -60,6 +60,8 @@ if __name__ == '__main__':
     sm.add_state(main_menu)
     sm.add_state(battle_state)
 
+    some_event = None
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -67,7 +69,9 @@ if __name__ == '__main__':
                 fm.get_function("CFGManager").write_var_to_cfg("lang", fm.get_function("TranslateManager").get_curr())
                 fm.get_function("DiffManager").save_diff()
                 running = False
-            sm.get_state(sm.get_current_state()).update(event)
+            some_event = event
+        sm.get_state(sm.get_current_state()).update(some_event)
+        some_event = None
         sm.get_state(sm.get_current_state()).draw()
         clock.tick(fps)
         pygame.display.flip()

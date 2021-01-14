@@ -1,5 +1,6 @@
 from Menu.StateFather import StateFather
 from Entity.Post import Post
+from Entity import Grib
 from Low_line.Elixir import Elixir
 from Low_line.Choose_line import Choose_line
 
@@ -44,22 +45,23 @@ class BattleState(StateFather):
         if self.end_status == -1:
             self.enemy_entity.update(event)
             self.player_entity.update(event)
-            if event.type == self.pg.KEYUP:
-                index = max([i.is_selected() for i in self.choose_line])
-                self.choose_line[index].set_selected(False)
-                if event.key == self.pg.K_RIGHT:
-                    index = (index + 1) % 4
-                    self.fm.get_function('SoundManager').play_sound('menu.mp3')
-                elif event.key == self.pg.K_LEFT:
-                    index = (index - 1) % 4
-                    self.fm.get_function('SoundManager').play_sound('menu.mp3')
-                self.choose_line[index].set_selected(True)
-            if event.type == self.pg.MOUSEBUTTONDOWN:
-                pos = self.pg.mouse.get_pos()
-                if event.button == 1:
-                    if pos[0] <= 400:
-                        pass
-                        # spawn entity
+            if event:
+                if event.type == self.pg.KEYUP:
+                    index = max([i.is_selected() for i in self.choose_line])
+                    self.choose_line[index].set_selected(False)
+                    if event.key == self.pg.K_RIGHT:
+                        index = (index + 1) % 4
+                        self.fm.get_function('SoundManager').play_sound('menu.mp3')
+                    elif event.key == self.pg.K_LEFT:
+                        index = (index - 1) % 4
+                        self.fm.get_function('SoundManager').play_sound('menu.mp3')
+                    self.choose_line[index].set_selected(True)
+                if event.type == self.pg.MOUSEBUTTONDOWN:
+                    pos = self.pg.mouse.get_pos()
+                    if event.button == 1:
+                        if pos[0] <= 400:
+                            Grib.Grib(*pos, self.fm, self, self.fm.get_function("SimpleVars").PLAYER_TEAM_ID,
+                                      self.player_entity)
 
         if self.now_time == self.bot_kd:
             for i in range(self.diff * 3):
