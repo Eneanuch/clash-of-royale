@@ -12,7 +12,7 @@
     effects = Зв. эффекты
     score = Очки
     scores = Очков
-    show_top10 = Показать топ-10
+    show_top10 = Показать топ-5
 [EN]
     play = Play
     exit = Exit
@@ -27,4 +27,4 @@
     effects = Snd. Effects
     score = Score
     scores = Score's
-    show_top10 = Show top 10
+    show_top10 = Show top 5

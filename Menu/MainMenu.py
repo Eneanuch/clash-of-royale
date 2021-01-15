@@ -46,7 +46,9 @@ class MainMenu(StateFather):
             self.draw_text(self.pg, self.translate.translate(i), 150, 100 + k * 30, color=color)
         if self.show_top_10:
             self.draw_rect_alpha(self.pg.Color(0, 0, 0, 200), self.pg.Rect(450, 100, 300, 5 * 37), 8)
-            for k, i in enumerate(sorted(self.top_10_list)[::-1]):
+            for k, i in enumerate(sorted(self.top_10_list, key=lambda x: int(x[0]))[::-1]):
+                if k == 5:
+                    break
                 self.draw_text(self.pg, str(k + 1) + "| " +
                                self.fm.get_function("TranslateManager").translate("scores")
                                + ": " + str(i[0]), 480, 100 + k * 37)
@@ -110,7 +112,7 @@ class MainMenu(StateFather):
         super().start_state()
 
         self.top_10_list = list(self.fm.get_function("DBManager").
-                                do_request("SELECT * FROM main"))[:5]
+                                do_request("SELECT * FROM main"))
 
         self.fm.get_function('SoundManager').play_background_sound('background_menu.mp3')
 
