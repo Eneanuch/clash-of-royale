@@ -46,6 +46,7 @@ class SoundManager:
     def set_volume(self, volume):
         volume = self.fm.get_function('SimpleFunctionsManager').not_round_round(volume, 0, 1)
         volume = float(str(volume)[:4])
+        # some action
         self.now_volume = volume
         # print(self.pygame.mixer.music.get_volume())
         self.pygame.mixer.music.pause()
