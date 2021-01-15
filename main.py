@@ -3,11 +3,14 @@ from library.managers import CFGManager, DBManager, FunctionManager, \
     IMGManager, TranslateManager, SoundManager, SimpleVars, StateManager, \
     SimpleFunctionsManager, DiffManager
 from os import environ
-from Menu.MainMenu import MainMenu
-from Menu.BattleState import BattleState
 
 environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
+
+from Menu.MainMenu import MainMenu
+from Menu.BattleState import BattleState
+
+# do not for pep8, but it only one way to hide it
 
 DEBUG = False
 
