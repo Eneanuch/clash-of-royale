@@ -23,8 +23,7 @@ class IMGManager:
     def load_image(self, name, colorkey=None, replace_file=False):
         from os import path
         if not self.pygame:
-            self.main_log.write_log(f"EEEEE davai ura pygame naxui ne nuzhen davai!!!!"
-                                    f" (pygame is not loaded)", self, self.main_log.ERROR_STATE)
+            self.main_log.write_log(f"pygame is not loaded", self, self.main_log.ERROR_STATE)
             return
         fullname = path.join(self.PATH_TO_IMAGES, name)
         if self.all_images.get(fullname, 0) and not replace_file:
