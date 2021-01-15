@@ -37,5 +37,3 @@ class CFGManager:
         self.cfg_main.set(self.GENERAL_SECTION, word, parameter)
         with open(self.PATH_TO_CFG + "main.cfg", "w", encoding="utf-8") as a:
             self.cfg_main.write(a)
-
-

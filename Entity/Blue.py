@@ -12,6 +12,6 @@ class Blue(Entity):
         self.price = 2.0
 
         self.image_name = 'blue.png'
-        self.all_animations = ['walk', 'death', 'attack']
-        self.all_animations_sprites = [6, 6, 6]
+        self.all_animations = ['walk', 'attack']
+        self.all_animations_sprites = [6, 6]
         self.sprite_init()

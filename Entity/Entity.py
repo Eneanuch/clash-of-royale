@@ -81,17 +81,14 @@ class Entity(Sprite):
 
     def set_health(self, hp):
         self.hp = hp
-        self.check_death()
 
     def add_health(self, hp):
         self.hp += hp
-        self.check_death()
 
     def give_damage(self, dmg):
         if dmg:
             self.fm.get_function('SoundManager').play_sound('attack.mp3')
             self.hp -= dmg
-            self.check_death()
 
     def attack(self, entity):
         entity.give_damage(self.damage)
@@ -137,6 +134,7 @@ class Entity(Sprite):
                 if self.now_animation == 2:
                     # change to kill
                     if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
+                        self.now_animation = 0
                         self.kill()
 
                 # changing sprite

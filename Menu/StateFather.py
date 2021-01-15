@@ -35,4 +35,3 @@ class StateFather:
         shape_surf = self.pg.Surface(self.pg.Rect(rect).size, self.pg.SRCALPHA)
         self.pg.draw.rect(shape_surf, color, shape_surf.get_rect(), border_radius=radius)
         self.screen.blit(shape_surf, rect)
-

@@ -18,14 +18,14 @@ class MainMenu(StateFather):
         self.background_sprite.rect.x = 0
         self.background_sprite.rect.y = 0
 
-        self.buttons = ["play", "difficult",  "sound", "effects",  "lang", "show_top10"]
+        self.buttons = ["play", "difficult", "sound", "effects", "lang", "show_top10"]
         self.buttons_status = ["",
                                "self.fm.get_function('DiffManager').get_diff()",
                                "self.fm.get_function('SoundManager').get_volume()",
                                "self.fm.get_function('SoundManager').get_effect()",
                                "self.fm.get_function('TranslateManager').get_now_lang()",
                                ""
-                                ]
+                               ]
         self.actions = [self.play_action, self.diff_action, self.sound_action,
                         self.effects_action, self.lang_action, self.show_top_10_action]
 

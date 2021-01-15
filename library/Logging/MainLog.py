@@ -18,7 +18,7 @@ class MainLog:  # it will build and write logs
 
     def __init__(self, print_logs, log_it):
         self.print_logs = print_logs  # is program need to print logs
-        self.log_it = log_it  # do logs ?(действительно, а для кого я тогда эту хрень делаю???)
+        self.log_it = log_it  # do logs
 
         self.start_log_it = 0
         self.file = 0
