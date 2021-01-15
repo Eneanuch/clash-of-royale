@@ -134,6 +134,7 @@ class Entity(Sprite):
                 if self.now_animation == 2:
                     # change to kill
                     if self.tick_of_animation == len(self.all_animations_file[self.now_animation]) - 1:
+                        self.now_animation = 0
                         self.kill()
 
                 # changing sprite
