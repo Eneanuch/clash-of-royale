@@ -1,7 +1,7 @@
 # Clash of Royale
 ITs best game in the our world, it will broke play market and appstore, ETO NORMALNO VOOBSHE??? GREMLINI VPERED
 
-
+Здесь указаны не все менеджеры и их функции, в ближайшее время добавлю остальные
 Немного про менеджеры<br>
 Далее main_log - класс для логирования, fm - FunctionManager<br>
 На данный момент есть слудующие менеджеры с слудующими функциями:<br>
