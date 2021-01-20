@@ -14,10 +14,11 @@ class BattleState(StateFather):
 
         self.now_time = 0
 
+        self.diff = 0
+
         self.score = 0
         self.do_score = 0
 
-        self.diff = int(fm.get_function("DiffManager").get_diff())
         self.bot_kd = randint(150, 500)
 
         self.all_types_of_entities = [Grib.Grib, Blue.Blue, Purple.Purple, Flying.Flying]
@@ -151,6 +152,8 @@ class BattleState(StateFather):
 
     def start_state(self):
         super().start_state()
+        self.diff = int(self.fm.get_function("DiffManager").get_diff())
+        # print(self.diff)
         self.fm.get_function('SoundManager').play_background_sound('background_battle.mp3')
 
     def stop_state(self):
